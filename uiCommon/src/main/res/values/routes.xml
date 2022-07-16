@@ -1,0 +1,4 @@
+<resources>
+    <string name="route_details_fragment_request" translatable="false">android-app://com.myapps.pixabayeye/detailsFragment/%d</string>
+    <string name="route_details_fragment_uri" translatable="false">android-app://com.myapps.pixabayeye/detailsFragment/{imageId}</string>
+</resources>

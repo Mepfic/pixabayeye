@@ -14,5 +14,10 @@
 //}
 rootProject.name = "PixabayEye"
 include(
-    ":app"
+    ":app",
+    ":data",
+    ":domain",
+    ":uiCommon",
+    ":uiSearch",
+    ":uiDetails"
 )

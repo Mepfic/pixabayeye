@@ -1,7 +1,8 @@
 plugins {
-    id(BuildPlugins.androidApplication)
     kotlin("android")
-    id(BuildPlugins.navigationSafeArgs)
+    kotlin("kapt")
+    id(BuildPlugins.androidApplication)
+    id(BuildPlugins.hiltPlugin)
 }
 
 android {
@@ -25,9 +26,6 @@ android {
             )
         }
     }
-    buildFeatures {
-        viewBinding = true
-    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -39,4 +37,15 @@ dependencies {
     implementation(Libraries.activityKtx)
     implementation(Libraries.fragmentKtx)
     implementation(Libraries.material)
+    implementation(Libraries.hilt)
+    kapt(Libraries.hiltCompiler)
+    implementation(Libraries.navigationFragment)
+    implementation(Libraries.navigationUi)
+
+    implementation(project(":uiSearch"))
+    implementation(project(":uiDetails"))
+}
+
+hilt {
+    enableAggregatingTask = true
 }

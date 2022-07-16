@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_root"
+    app:startDestination="@id/nav_search">
+
+    <include app:graph="@navigation/nav_search" />
+    <include app:graph="@navigation/nav_details" />
+
+    <action
+        android:id="@+id/action_SearchFragment_to_DetailsFragment"
+        app:destination="@id/nav_search">
+        <argument
+            android:name="imageId"
+            app:argType="long" />
+    </action>
+
+    <action
+        android:id="@+id/action_DetailsFragment_to_SearchFragment"
+        app:destination="@id/nav_details" />
+</navigation>

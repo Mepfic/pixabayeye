@@ -9,7 +9,7 @@ buildscript {
         classpath(BuildPlugins.kotlinGradlePlugin)
         classpath(BuildPlugins.kotlinSerializationPlugin)
         classpath(BuildPlugins.navigationSafeArgsGradlePlugin)
-        classpath(BuildPlugins.hiltPlugin)
+        classpath(BuildPlugins.gradleHiltPlugin)
     }
 }
 
@@ -36,7 +36,3 @@ allprojects {
 tasks.register<Delete>("clean") {
     delete("build")
 }
-
-//println("Gradle.startParameter.taskNames: ${gradle.startParameter.taskNames}")
-//System.getProperties().forEach { key, value -> println("System.Property: $key=$value") }
-//System.getenv().forEach { (key, value) -> println("System.env: $key=$value") }

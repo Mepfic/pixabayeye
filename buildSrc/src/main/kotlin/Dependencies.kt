@@ -12,12 +12,15 @@ private object Versions {
     const val lifecycle = "2.4.1"
     const val material = "1.6.1"
     const val mockk = "1.12.4"
+    const val retrofit = "2.9.0"
+    const val moshiConverter = "2.9.0"
     const val moshi = "1.12.0"
+    const val loggingInterceptor = "4.10.0"
     const val navigation = "2.4.2"
     const val paging = "3.0.1"
     const val swipeRefreshLayout = "1.1.0"
     const val hilt = "2.38.1"
-
+    const val timber = "5.0.1"
 }
 
 object PluginVersions {
@@ -37,10 +40,12 @@ object AndroidSdk {
 
 object BuildPlugins {
     const val androidApplication = "com.android.application"
+    const val androidLibrary = "com.android.library"
     const val detektPlugin = "io.gitlab.arturbosch.detekt"
     const val kotlinPluginParcelize = "plugin.parcelize"
     const val serializationPlugin = "plugin.serialization"
     const val navigationSafeArgs = "androidx.navigation.safeargs.kotlin"
+    const val hiltPlugin = "dagger.hilt.android.plugin"
 
     val navigationSafeArgsGradlePlugin by lazy {
         "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
@@ -50,7 +55,7 @@ object BuildPlugins {
     val kotlinSerializationPlugin by lazy {
         "org.jetbrains.kotlin:kotlin-serialization:${PluginVersions.kotlin}"
     }
-    val hiltPlugin by lazy { "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}" }
+    val gradleHiltPlugin by lazy { "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}" }
 
 }
 
@@ -82,12 +87,17 @@ object Libraries {
     val kotlinxSerializationJson by lazy {
         "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.kotlinxSerialization}"
     }
+    val retrofit by lazy { "com.squareup.retrofit2:retrofit:${Versions.retrofit}" }
+    val moshiConverter by lazy { "com.squareup.retrofit2:converter-moshi:${Versions.moshiConverter}" }
+    val loggingInterceptor by lazy { "com.squareup.okhttp3:logging-interceptor:${Versions.loggingInterceptor}" }
     val moshiKotlin by lazy { "com.squareup.moshi:moshi-kotlin:${Versions.moshi}" }
     val hilt by lazy { "com.google.dagger:hilt-android:${Versions.hilt}" }
     val hiltCompiler by lazy { "com.google.dagger:hilt-android-compiler:${Versions.hilt}" }
+    val timber by lazy { "com.jakewharton.timber:timber:${Versions.timber}" }
     val swipeRefreshLayout by lazy {
         "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshLayout}"
     }
+
 }
 
 object TestLibraries {
