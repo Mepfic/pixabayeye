@@ -1,7 +1,6 @@
 package com.myapps.pixabayeye.domain
 
 import com.myapps.pixabayeye.domain.model.HitModel
-import com.myapps.pixabayeye.domain.model.mapToHitModel
 import javax.inject.Inject
 
 class DetailsUseCase @Inject constructor(
@@ -9,5 +8,5 @@ class DetailsUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(id: Long): HitModel =
-        imageRepository.getImageById(id).let(mapToHitModel)
+        imageRepository.getImageById(id)
 }

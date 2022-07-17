@@ -23,6 +23,7 @@ dependencies {
 
     implementation(Libraries.hilt)
     kapt(Libraries.hiltCompiler)
+    implementation(Libraries.pagingRuntimeKtx)
 
     // unit test
     testImplementation(TestLibraries.kotlinReflect)

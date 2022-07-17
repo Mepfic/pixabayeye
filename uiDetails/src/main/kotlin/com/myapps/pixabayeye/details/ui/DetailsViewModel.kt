@@ -14,7 +14,7 @@ class DetailsViewModel @Inject constructor(
     private val detailsUseCase: DetailsUseCase
 ): BaseViewModel() {
 
-    private val _dataFlow = MutableSharedFlow<HitModel>()
+    private val _dataFlow = MutableSharedFlow<HitModel>(replay = 1)
     val dataFlow: SharedFlow<HitModel> = _dataFlow.asSharedFlow()
 
     fun getImages(id: Long) {

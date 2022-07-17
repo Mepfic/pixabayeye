@@ -1,4 +1,4 @@
-package com.myapps.pixabayeye.data
+package com.myapps.pixabayeye.data.network
 
 import okhttp3.Interceptor
 import okhttp3.Response

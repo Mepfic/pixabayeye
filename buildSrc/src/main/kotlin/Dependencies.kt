@@ -17,10 +17,11 @@ private object Versions {
     const val moshi = "1.12.0"
     const val loggingInterceptor = "4.10.0"
     const val navigation = "2.4.2"
-    const val paging = "3.0.1"
+    const val paging = "3.1.1"
     const val swipeRefreshLayout = "1.1.0"
     const val hilt = "2.38.1"
     const val timber = "5.0.1"
+    const val room = "2.4.2"
 }
 
 object PluginVersions {
@@ -97,7 +98,10 @@ object Libraries {
     val swipeRefreshLayout by lazy {
         "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.swipeRefreshLayout}"
     }
-
+    val roomKtx by lazy { "androidx.room:room-ktx:${Versions.room}" }
+    val roomRuntime by lazy { "androidx.room:room-runtime:${Versions.room}" }
+    val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.room}" }
+    val roomPaging by lazy { "androidx.room:room-paging:${Versions.room}" }
 }
 
 object TestLibraries {
@@ -114,4 +118,5 @@ object TestLibraries {
 //    val espressoCore by lazy {  "androidx.test.espresso:espresso-core:${Versions.espresso}"}
 //    val espressoIntents by lazy {  "androidx.test.espresso:espresso-intents:${Versions.espresso}"}
     val fragmentTesting by lazy { "androidx.fragment:fragment-testing:${Versions.fragment}" }
+    val roomTesting by lazy { "androidx.room:room-testing:${Versions.room}" }
 }

@@ -11,4 +11,9 @@ dependencies {
     implementation(Libraries.moshiConverter)
     implementation(Libraries.retrofit)
     implementation(Libraries.loggingInterceptor)
+
+    implementation(Libraries.roomKtx)
+    implementation(Libraries.roomRuntime)
+    implementation(Libraries.roomPaging)
+    kapt(Libraries.roomCompiler)
 }

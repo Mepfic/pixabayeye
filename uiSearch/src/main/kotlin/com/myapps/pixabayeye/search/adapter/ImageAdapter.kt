@@ -2,14 +2,13 @@ package com.myapps.pixabayeye.search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.myapps.pixabayeye.domain.model.HitModel
 import com.myapps.pixabayeye.search.databinding.ItemSearchBinding
 
-class ImageAdapter(private val onClickCallback: (itemId: Long) -> Unit) :
-    RecyclerView.Adapter<ImageAdapter.ItemsViewHolder>() {
-
-    private var items: List<HitModel> = mutableListOf()
+internal class ImageAdapter(private val onClickCallback: (itemId: Long) -> Unit) :
+    PagingDataAdapter<HitModel, ItemsViewHolder>(diffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         ItemsViewHolder(
@@ -17,23 +16,19 @@ class ImageAdapter(private val onClickCallback: (itemId: Long) -> Unit) :
         )
 
     override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
-        with(holder) {
-            with(items[position]) {
-//                binding.appCompatImageView.setImageResource(getImageByType(type))
-                binding.itemTitle.text = userName
-                binding.root.setOnClickListener { onClickCallback(imageId) }
-            }
+        getItem(position)?.let { item ->
+            holder.bindTo(item)
+            holder.binding.root.setOnClickListener { onClickCallback(item.imageId) }
         }
     }
 
-    override fun getItemCount() = items.size
+    companion object {
+        val diffCallback = object : DiffUtil.ItemCallback<HitModel>() {
+            override fun areItemsTheSame(oldItem: HitModel, newItem: HitModel): Boolean =
+                oldItem.imageId == newItem.imageId
 
-    fun submitList(list: List<HitModel>) {
-        items = list
-        notifyDataSetChanged()
+            override fun areContentsTheSame(oldItem: HitModel, newItem: HitModel): Boolean =
+                oldItem == newItem
+        }
     }
-
-
-    inner class ItemsViewHolder(val binding: ItemSearchBinding) :
-        RecyclerView.ViewHolder(binding.root)
 }

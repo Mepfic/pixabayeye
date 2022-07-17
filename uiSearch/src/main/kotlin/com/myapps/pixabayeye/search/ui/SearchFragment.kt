@@ -42,7 +42,7 @@ class SearchFragment : BaseFragment() {
         binding.recycler.adapter = adapter
 
         viewModel.dataFlow.collectWithViewLifecycle {
-            adapter.submitList(it.hits)
+            adapter.submitData(it)
         }
     }
 

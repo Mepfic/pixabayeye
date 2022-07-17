@@ -1,5 +1,6 @@
-package com.myapps.pixabayeye.data
+package com.myapps.pixabayeye.data.network
 
+import com.myapps.pixabayeye.data.network.model.ImagesResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

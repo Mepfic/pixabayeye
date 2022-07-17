@@ -1,13 +1,13 @@
 package com.myapps.pixabayeye.domain
 
-import com.myapps.pixabayeye.domain.model.HitsModel
-import com.myapps.pixabayeye.domain.model.mapToHitsModel
+import androidx.paging.PagingData
+import com.myapps.pixabayeye.domain.model.HitModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.Flow
 
 class ImagesUseCase @Inject constructor(
     private val imageRepository: ImageRepository
 ) {
-
-    suspend operator fun invoke(query: String): HitsModel =
-        imageRepository.getImages(query).let(mapToHitsModel)
+    operator fun invoke(query: String): Flow<PagingData<HitModel>> =
+        imageRepository.getImages(query)
 }

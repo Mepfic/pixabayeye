@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 abstract class BaseFragment : Fragment() {
 
-    protected fun <T> Flow<T>.collectWithViewLifecycle(block: (T) -> Unit) {
+    protected fun <T> Flow<T>.collectWithViewLifecycle(block: suspend (T) -> Unit) {
         viewLifecycleOwner.lifecycleScope.launch {
             flowWithLifecycle(viewLifecycleOwner.lifecycle)
                 .collect { block(it) }
