@@ -1,6 +1,5 @@
 package com.myapps.pixabayeye.common
 
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -21,7 +20,6 @@ class SingleFlowEvent<T> : Flow<T> {
         channelEvent.send(event)
     }
 
-    @InternalCoroutinesApi
     override suspend fun collect(collector: FlowCollector<T>) {
         flowEvent.collect(collector)
     }

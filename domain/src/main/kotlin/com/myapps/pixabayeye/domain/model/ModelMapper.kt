@@ -10,6 +10,7 @@ internal val mapEntityToHitModel = { entity: HitEntity ->
         tags = entity.tags,
         likes = entity.likes,
         downloads = entity.downloads,
+        comments = entity.comments,
         previewUrl = entity.previewUrl,
         middleImageUrl = entity.middleImageUrl,
         largeImageUrl = entity.largeImageUrl

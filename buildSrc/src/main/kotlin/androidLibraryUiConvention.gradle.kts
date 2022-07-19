@@ -18,8 +18,10 @@ dependencies {
     implementation(Libraries.activityKtx)
     implementation(Libraries.fragmentKtx)
     implementation(Libraries.material)
+    implementation(Libraries.swipeRefreshLayout)
     implementation(Libraries.navigationUi)
     implementation(Libraries.navigationFragment)
+    implementation(Libraries.coil)
 
     implementation(Libraries.hilt)
     kapt(Libraries.hiltCompiler)

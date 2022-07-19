@@ -10,6 +10,7 @@ internal val mapResponseToHitEntity = { response: HitResponse ->
         tags = response.tags,
         likes = response.likes,
         downloads = response.downloads,
+        comments = response.comments,
         previewUrl = response.previewUrl,
         middleImageUrl = response.middleImageUrl,
         largeImageUrl = response.largeImageUrl

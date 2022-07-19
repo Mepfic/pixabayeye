@@ -21,73 +21,69 @@
                 android:id="@+id/detailsImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/space_extra_small"
+                android:layout_marginStart="@dimen/space_small"
                 android:minWidth="@dimen/details_image_min_size"
                 android:minHeight="@dimen/details_image_min_size"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:src="@drawable/ic_icon_placeholder" />
 
             <TextView
                 android:id="@+id/likesText"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_extra_huge"
-                android:layout_marginTop="@dimen/space_large"
+                android:layout_marginTop="@dimen/space_extra_large"
+                android:drawablePadding="@dimen/space_extra_small"
                 android:gravity="center"
                 app:drawableStartCompat="@drawable/ic_icon_heart"
-                app:layout_constraintEnd_toStartOf="@id/downloadsText"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detailsImage"
+                app:layout_constraintStart_toEndOf="@id/detailsImage"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="22" />
 
             <TextView
                 android:id="@+id/downloadsText"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_extra_large"
+                android:layout_marginTop="@dimen/space_small"
+                android:drawablePadding="@dimen/space_extra_small"
                 android:gravity="center"
                 app:drawableStartCompat="@drawable/ic_icon_download"
-                app:layout_constraintEnd_toStartOf="@id/commentsText"
-                app:layout_constraintStart_toEndOf="@id/likesText"
-                app:layout_constraintTop_toTopOf="@id/likesText"
+                app:layout_constraintStart_toStartOf="@id/likesText"
+                app:layout_constraintTop_toBottomOf="@id/likesText"
                 tools:text="33" />
 
             <TextView
                 android:id="@+id/commentsText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/space_extra_large"
-                android:layout_marginEnd="@dimen/space_small"
+                android:layout_marginTop="@dimen/space_small"
+                android:drawablePadding="@dimen/space_extra_small"
                 android:gravity="center"
                 app:drawableStartCompat="@drawable/ic_icon_comment"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/downloadsText"
-                app:layout_constraintTop_toTopOf="@id/likesText"
+                app:layout_constraintStart_toStartOf="@id/likesText"
+                app:layout_constraintTop_toBottomOf="@id/downloadsText"
                 tools:text="44" />
 
             <com.google.android.material.chip.ChipGroup
                 android:id="@+id/tagsChipGroup"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_small"
-                app:layout_constraintEnd_toEndOf="@id/commentsText"
+                android:layout_marginTop="@dimen/space_extra_large"
                 app:layout_constraintStart_toStartOf="@id/likesText"
-                app:layout_constraintTop_toBottomOf="@id/likesText" />
+                app:layout_constraintTop_toBottomOf="@id/commentsText" />
 
             <TextView
                 android:id="@+id/nameText"
                 style="@style/Theme.PixabayEye.TextView.Tooltip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/space_large"
                 android:layout_marginEnd="@dimen/space_extra_large"
-                android:layout_marginBottom="@dimen/space_extra_small"
+                android:layout_marginBottom="@dimen/space_extra_large"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tagsChipGroup"
+                app:layout_constraintStart_toStartOf="@id/likesText"
                 tools:text="by: User Name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

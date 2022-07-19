@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="preview_icon_size">60dp</dimen>
+    <dimen name="preview_icon_corner_radius">2dp</dimen>
+    <dimen name="details_image_corner_radius">8dp</dimen>
+    <dimen name="details_card_elevation">4dp</dimen>
+    <dimen name="details_card_corner_radius">8dp</dimen>
+    <dimen name="details_image_min_size">300dp</dimen>
+
+    <dimen name="space_extra_tiny">2dp</dimen>
+    <dimen name="space_tiny">4dp</dimen>
+    <dimen name="space_extra_small">8dp</dimen>
+    <dimen name="space_small">16dp</dimen>
+    <dimen name="space_medium">20dp</dimen>
+    <dimen name="space_large">24dp</dimen>
+    <dimen name="space_extra_large">32dp</dimen>
+    <dimen name="space_huge">36dp</dimen>
+    <dimen name="space_extra_huge">40dp</dimen>
+
+</resources>
