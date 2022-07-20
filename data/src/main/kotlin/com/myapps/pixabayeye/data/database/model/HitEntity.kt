@@ -5,7 +5,6 @@ import androidx.room.Entity
 @Entity(tableName = "hits", primaryKeys = ["imageId"])
 data class HitEntity(
     val imageId: Long,
-
     val userId: Long,
     val userName: String,
     val tags: String,

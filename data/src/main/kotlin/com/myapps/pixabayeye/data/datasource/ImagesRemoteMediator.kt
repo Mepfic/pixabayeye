@@ -5,9 +5,12 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
+import com.myapps.pixabayeye.data.BuildConfig
 import com.myapps.pixabayeye.data.database.AppDatabase
 import com.myapps.pixabayeye.data.database.dao.ImagesDao
+import com.myapps.pixabayeye.data.database.dao.SearchDao
 import com.myapps.pixabayeye.data.database.model.HitEntity
+import com.myapps.pixabayeye.data.database.model.SearchEntity
 import com.myapps.pixabayeye.data.network.MainNetworkApi
 import com.myapps.pixabayeye.data.network.model.ImagesResponse
 import com.myapps.pixabayeye.data.network.model.mapResponseToHitEntity
@@ -25,6 +28,7 @@ class ImagesRemoteMediator @AssistedInject constructor(
 ) : RemoteMediator<Int, HitEntity>() {
 
     private val imagesDao: ImagesDao = database.imagesDao()
+    private val searchDao: SearchDao = database.searchDao()
 
     private var pageIndex = 1
 
@@ -43,8 +47,9 @@ class ImagesRemoteMediator @AssistedInject constructor(
 
             database.withTransaction {
                 if (loadType == LoadType.REFRESH) {
-                    imagesDao.clearAll()
+                    searchDao.clearSearch(query)
                 }
+                searchDao.insertAll(data.hits.map { SearchEntity(it.imageId, query) })
                 imagesDao.insertAll(data.hits.map(mapResponseToHitEntity))
             }
 
@@ -73,7 +78,7 @@ class ImagesRemoteMediator @AssistedInject constructor(
 
     private suspend fun fetchImages(pageSize: Int, pageNumber: Int): ImagesResponse =
         mainNetworkApi.getImages(
-            key = "28584276-6da744396fde61c4822dfa505",
+            key = BuildConfig.API_KEY,
             query = query,
             perPage = pageSize,
             page = pageNumber

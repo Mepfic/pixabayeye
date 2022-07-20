@@ -23,7 +23,7 @@ class ImageRepositoryImpl @Inject constructor(
         Pager(
             config = getPagingConfig(),
             remoteMediator = imagesRemoteMediatorFactory.create(query),
-            pagingSourceFactory = { imagesDao.getImagesByQuery() }
+            pagingSourceFactory = { imagesDao.getImagesByQuery(query) }
         )
             .flow
             .map { it.map(mapEntityToHitModel) }

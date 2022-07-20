@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config>
+        <domain includeSubdomains="true">pixabay.com</domain>
+        <pin-set expiration="2023-04-11">
+            <pin digest="SHA-256">ZSJ7mNu5yX7a9z1pjC5YvwhGp7W3AczmFedL/+uvTh8=</pin>
+        </pin-set>
+    </domain-config>
+</network-security-config>
