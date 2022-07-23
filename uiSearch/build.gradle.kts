@@ -11,4 +11,6 @@ android {
 dependencies {
     implementation(project(":uiCommon"))
     implementation(project(":domain"))
+
+    testImplementation(project(":testCommon"))
 }

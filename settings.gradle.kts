@@ -19,5 +19,6 @@ include(
     ":domain",
     ":uiCommon",
     ":uiSearch",
-    ":uiDetails"
+    ":uiDetails",
+    ":testCommon",
 )

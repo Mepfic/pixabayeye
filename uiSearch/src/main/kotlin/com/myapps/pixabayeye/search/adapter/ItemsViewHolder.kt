@@ -10,7 +10,7 @@ import com.myapps.pixabayeye.domain.model.HitModel
 import com.myapps.pixabayeye.domain.util.tagsToList
 import com.myapps.pixabayeye.search.databinding.ItemSearchBinding
 
-internal class ItemsViewHolder(val binding: ItemSearchBinding) :
+class ItemsViewHolder(val binding: ItemSearchBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bindTo(item: HitModel?) {
         binding.nameText.text = item?.userName
@@ -20,7 +20,8 @@ internal class ItemsViewHolder(val binding: ItemSearchBinding) :
             placeholder(R.drawable.ic_icon_placeholder)
             transformations(
                 RoundedCornersTransformation(
-                    binding.root.context.resources.getDimensionPixelSize(R.dimen.preview_icon_corner_radius)
+                    binding.root.context.resources
+                        .getDimensionPixelSize(R.dimen.preview_icon_corner_radius)
                         .toFloat()
                 )
             )

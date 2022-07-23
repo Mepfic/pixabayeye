@@ -1,4 +1,4 @@
-package com.myapps.pixabayeye.common
+package com.myapps.pixabayeye.common.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

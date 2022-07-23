@@ -8,6 +8,7 @@ import timber.log.Timber
 
 internal class ApiLogger : HttpLoggingInterceptor.Logger {
 
+    @Suppress("MagicNumber", "SwallowedException")
     override fun log(message: String) {
         if (message.startsWith("{") || message.startsWith("["))
             try {

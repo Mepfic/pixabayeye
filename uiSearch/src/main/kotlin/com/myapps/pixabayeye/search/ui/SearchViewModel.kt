@@ -3,7 +3,7 @@ package com.myapps.pixabayeye.search.ui
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.myapps.pixabayeye.common.BaseViewModel
+import com.myapps.pixabayeye.common.ui.BaseViewModel
 import com.myapps.pixabayeye.domain.ImagesUseCase
 import com.myapps.pixabayeye.domain.model.HitModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,12 +29,10 @@ class SearchViewModel @Inject constructor(
         .flatMapLatest {
             imagesUseCase.invoke(it)
                 .catch {
-
                 }
         }
         .cachedIn(viewModelScope)
         .catch {
-
         }
         .stateIn(viewModelScope, started = SharingStarted.Lazily, PagingData.empty())
 //        .onEach {  }

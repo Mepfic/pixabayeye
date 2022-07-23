@@ -16,17 +16,28 @@ android {
                 buildConfigField("String", "API_KEY", key)
             }
         }
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
 dependencies {
+    androidTestImplementation(project(":testCommon"))
+
     implementation(Libraries.moshiKotlin)
     implementation(Libraries.moshiConverter)
     implementation(Libraries.retrofit)
     implementation(Libraries.loggingInterceptor)
-
     implementation(Libraries.roomKtx)
     implementation(Libraries.roomRuntime)
     implementation(Libraries.roomPaging)
+    implementation(TestLibraries.kotlinReflect)
+
+    androidTestImplementation(TestLibraries.kotlinTest)
+    androidTestImplementation(TestLibraries.kotlinxCoroutinesTest)
+    androidTestImplementation(TestLibraries.roomTesting)
+    androidTestImplementation(TestLibraries.androidTestRunner)
+    androidTestImplementation(TestLibraries.androidTestCore)
+
     kapt(Libraries.roomCompiler)
 }

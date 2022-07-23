@@ -22,13 +22,7 @@ dependencies {
     implementation(Libraries.navigationUi)
     implementation(Libraries.navigationFragment)
     implementation(Libraries.coil)
-
     implementation(Libraries.hilt)
-    kapt(Libraries.hiltCompiler)
 
-    // unit test
-    testImplementation(TestLibraries.kotlinReflect)
-    testImplementation(TestLibraries.kotlinTest)
-    testImplementation(TestLibraries.kotlinxCoroutinesTest)
-    testImplementation(TestLibraries.flowTest)
+    kapt(Libraries.hiltCompiler)
 }

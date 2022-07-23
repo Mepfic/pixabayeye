@@ -22,6 +22,15 @@ private object Versions {
     const val hilt = "2.38.1"
     const val timber = "5.0.1"
     const val room = "2.4.2"
+    const val androidTest = "1.4.0"
+    const val androidTestRunner = "1.4.0"
+    const val androidTestRules = "1.4.0"
+    const val androidTestTruth = "1.4.0"
+    const val androidTestJUnit = "1.1.3"
+    const val espresso = "3.4.0"
+    const val uiAutomator = "2.2.0"
+    const val hamcrest = "2.2"
+    const val androidTestOrchestrator = "1.4.1"
 }
 
 object PluginVersions {
@@ -105,18 +114,27 @@ object Libraries {
 }
 
 object TestLibraries {
-    //    val androidTestCore by lazy {  "androidx.test:core-ktx:${Versions.androidTest}"}
+    val androidTestCore by lazy { "androidx.test:core-ktx:${Versions.androidTest}" }
+    val androidTestRunner by lazy { "androidx.test:runner:${Versions.androidTestRunner}" }
+    val androidTestExtTruth by lazy { "androidx.test.ext:truth:${Versions.androidTestTruth}" }
+    val androidTestOrchestrator by lazy { "androidx.test:orchestrator:${Versions.androidTestOrchestrator}" }
+    val hamcrest by lazy { "org.hamcrest:hamcrest:${Versions.hamcrest}" }
+
+    val fragmentTesting by lazy { "androidx.fragment:fragment-testing:${Versions.fragment}" }
+
     val kotlinReflect by lazy { "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}" }
     val kotlinTest by lazy { "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}" }
     val kotlinxCoroutinesTest by lazy {
         "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.kotlinxCoroutines}"
     }
     val mockk by lazy { "io.mockk:mockk:${Versions.mockk}" }
-    val flowTest by lazy { "app.cash.turbine:turbine:${Versions.flowTestVersion}" }
+    val mockkAndroid by lazy { "io.mockk:mockk-android:${Versions.mockk}" }
 
-    //    val espressoContrib  by lazy {  "androidx.test.espresso:espresso-contrib:${Versions.espresso}"}
-//    val espressoCore by lazy {  "androidx.test.espresso:espresso-core:${Versions.espresso}"}
-//    val espressoIntents by lazy {  "androidx.test.espresso:espresso-intents:${Versions.espresso}"}
-    val fragmentTesting by lazy { "androidx.fragment:fragment-testing:${Versions.fragment}" }
+    val flowTest by lazy { "app.cash.turbine:turbine:${Versions.flowTestVersion}" }
+    val espressoCore by lazy { "androidx.test.espresso:espresso-core:${Versions.espresso}" }
+    val espressoContrib by lazy { "androidx.test.espresso:espresso-contrib:${Versions.espresso}" }
+    val espressoIntents by lazy { "androidx.test.espresso:espresso-intents:${Versions.espresso}" }
+
     val roomTesting by lazy { "androidx.room:room-testing:${Versions.room}" }
+    val hiltTesting by lazy { "com.google.dagger:hilt-android-testing:${Versions.hilt}" }
 }

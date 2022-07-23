@@ -20,14 +20,17 @@ android {
 
 dependencies {
     implementation(Libraries.timber)
-
     implementation(Libraries.hilt)
-    kapt(Libraries.hiltCompiler)
     implementation(Libraries.pagingRuntimeKtx)
 
-    // unit test
     testImplementation(TestLibraries.kotlinReflect)
     testImplementation(TestLibraries.kotlinTest)
     testImplementation(TestLibraries.kotlinxCoroutinesTest)
+    testImplementation(TestLibraries.mockk)
+    testImplementation(TestLibraries.mockkAndroid)
     testImplementation(TestLibraries.flowTest)
+    testImplementation(TestLibraries.androidTestCore)
+    testImplementation(TestLibraries.androidTestExtTruth)
+
+    kapt(Libraries.hiltCompiler)
 }

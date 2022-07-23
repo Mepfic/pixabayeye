@@ -14,10 +14,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
 @ExperimentalPagingApi
-class ImageRepositoryImpl @Inject constructor(
+class ImagesRepositoryImpl @Inject constructor(
     private val imagesRemoteMediatorFactory: ImagesRemoteMediator.Factory,
     private val imagesDao: ImagesDao,
-) : ImageRepository {
+) : ImagesRepository {
 
     override fun getImages(query: String): Flow<PagingData<HitModel>> =
         Pager(
@@ -27,9 +27,6 @@ class ImageRepositoryImpl @Inject constructor(
         )
             .flow
             .map { it.map(mapEntityToHitModel) }
-
-    override suspend fun getImageById(id: Long): HitModel =
-        imagesDao.getHitById(id).let(mapEntityToHitModel)
 
     private fun getPagingConfig() =
         PagingConfig(

@@ -1,3 +1,3 @@
 package com.myapps.pixabayeye.domain.util
 
-fun String.tagsToList() : List<String> = split(", ").toList()
+fun String.tagsToList(): List<String> = split(", ").toList()

@@ -11,8 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import com.myapps.pixabayeye.common.BaseFragment
 import com.myapps.pixabayeye.common.R
+import com.myapps.pixabayeye.common.ui.BaseFragment
 import com.myapps.pixabayeye.search.adapter.ImageAdapter
 import com.myapps.pixabayeye.search.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +27,8 @@ class SearchFragment : BaseFragment() {
     private lateinit var adapter: ImageAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)

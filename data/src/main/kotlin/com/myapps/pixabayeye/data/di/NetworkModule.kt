@@ -2,7 +2,6 @@ package com.myapps.pixabayeye.data.di
 
 import com.myapps.pixabayeye.data.network.ApiLogger
 import com.myapps.pixabayeye.data.network.EndPoints
-import com.myapps.pixabayeye.data.network.HeadersInterceptor
 import com.myapps.pixabayeye.data.network.MainNetworkApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -42,9 +41,7 @@ object NetworkModule {
             .readTimeout(READ_WRITE_TIMEOUT, TimeUnit.SECONDS)
             .writeTimeout(READ_WRITE_TIMEOUT, TimeUnit.SECONDS)
             .addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(HeadersInterceptor())
             .build()
-
 
     @Provides
     @Singleton
@@ -59,7 +56,6 @@ object NetworkModule {
     @Singleton
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor(ApiLogger()).setLevel(HttpLoggingInterceptor.Level.BODY)
-
 
     private const val CONNECT_TIMEOUT = 20L
     private const val READ_WRITE_TIMEOUT = 20L

@@ -8,4 +8,5 @@ android {
 
 dependencies {
     implementation(project(":data"))
+    testImplementation(project(":testCommon"))
 }

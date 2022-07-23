@@ -22,7 +22,9 @@ object DatabaseModule {
             context,
             AppDatabase::class.java,
             DATABASE_NAME
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
 
     @Provides
     fun provideImagesDao(database: AppDatabase): ImagesDao = database.imagesDao()

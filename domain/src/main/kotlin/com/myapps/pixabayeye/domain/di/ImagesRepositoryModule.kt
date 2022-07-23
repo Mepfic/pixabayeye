@@ -1,8 +1,8 @@
 package com.myapps.pixabayeye.domain.di
 
 import androidx.paging.ExperimentalPagingApi
-import com.myapps.pixabayeye.domain.ImageRepository
-import com.myapps.pixabayeye.domain.ImageRepositoryImpl
+import com.myapps.pixabayeye.domain.ImagesRepository
+import com.myapps.pixabayeye.domain.ImagesRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -11,10 +11,10 @@ import dagger.hilt.components.SingletonComponent
 @ExperimentalPagingApi
 @Module
 @InstallIn(SingletonComponent::class)
-interface RepositoriesModule {
+interface ImagesRepositoryModule {
 
     @Binds
     fun bindImagesRepository(
-        imageRepository: ImageRepositoryImpl
-    ): ImageRepository
+        imagesRepository: ImagesRepositoryImpl
+    ): ImagesRepository
 }

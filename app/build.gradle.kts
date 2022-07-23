@@ -15,7 +15,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.myapps.pixabayeye.AppTestRunner"
     }
 
     buildTypes {
@@ -31,19 +31,48 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    testOptions {
+        execution = "ANDROIDX_TEST_ORCHESTRATOR"
+    }
+
+    kapt {
+        arguments {
+            arg("dagger.hilt.shareTestComponents", "true")
+        }
+    }
 }
 
 dependencies {
+    implementation(project(":uiSearch"))
+    implementation(project(":uiDetails"))
+
+    androidTestImplementation(project(":domain"))
+    androidTestImplementation(project(":testCommon"))
+    androidTestImplementation(project(":uiCommon"))
+
     implementation(Libraries.activityKtx)
     implementation(Libraries.fragmentKtx)
     implementation(Libraries.material)
     implementation(Libraries.hilt)
-    kapt(Libraries.hiltCompiler)
     implementation(Libraries.navigationFragment)
     implementation(Libraries.navigationUi)
 
-    implementation(project(":uiSearch"))
-    implementation(project(":uiDetails"))
+    androidTestImplementation(Libraries.pagingRuntimeKtx)
+    androidTestImplementation(TestLibraries.androidTestCore)
+    androidTestImplementation(TestLibraries.androidTestRunner)
+    androidTestImplementation(TestLibraries.espressoCore)
+    androidTestImplementation(TestLibraries.espressoContrib)
+    androidTestImplementation(TestLibraries.espressoIntents)
+    androidTestImplementation(TestLibraries.fragmentTesting)
+    androidTestImplementation(TestLibraries.hiltTesting)
+    androidTestImplementation(TestLibraries.hamcrest)
+
+    debugImplementation(TestLibraries.fragmentTesting)
+    androidTestUtil(TestLibraries.androidTestOrchestrator)
+
+    kapt(Libraries.hiltCompiler)
+    kaptAndroidTest(Libraries.hiltCompiler)
 }
 
 hilt {

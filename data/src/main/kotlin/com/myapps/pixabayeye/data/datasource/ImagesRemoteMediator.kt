@@ -32,6 +32,7 @@ class ImagesRemoteMediator @AssistedInject constructor(
 
     private var pageIndex = 1
 
+    @Suppress("ReturnCount")
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, HitEntity>
@@ -55,11 +56,10 @@ class ImagesRemoteMediator @AssistedInject constructor(
 
             return MediatorResult.Success(
                 endOfPaginationReached =
-                data.hits.size < pageSize
-                        || data.totalHits <= pageIndex * pageSize
-                        || loadType == LoadType.PREPEND
+                data.hits.size < pageSize ||
+                    data.totalHits <= pageIndex * pageSize ||
+                    loadType == LoadType.PREPEND
             )
-
         } catch (e: IOException) {
             return MediatorResult.Error(e)
         } catch (e: HttpException) {

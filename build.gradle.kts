@@ -17,6 +17,7 @@ plugins {
     id(BuildPlugins.detektPlugin) version (PluginVersions.detekt)
 }
 
+apply(from = "$rootDir/ci.gradle.kts")
 
 allprojects {
     repositories {
@@ -24,13 +25,13 @@ allprojects {
         mavenCentral()
     }
 
+    apply(from = "$rootDir/ktlint.gradle.kts")
     apply(plugin = BuildPlugins.detektPlugin)
 
     detekt {
         parallel = true
         ignoreFailures = false
     }
-
 }
 
 tasks.register<Delete>("clean") {

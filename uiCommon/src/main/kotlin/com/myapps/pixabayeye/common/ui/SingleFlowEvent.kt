@@ -1,4 +1,4 @@
-package com.myapps.pixabayeye.common
+package com.myapps.pixabayeye.common.ui
 
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel

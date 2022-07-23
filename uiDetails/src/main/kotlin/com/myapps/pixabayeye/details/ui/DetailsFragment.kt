@@ -10,8 +10,8 @@ import coil.load
 import coil.request.CachePolicy
 import coil.transform.RoundedCornersTransformation
 import com.google.android.material.chip.Chip
-import com.myapps.pixabayeye.common.BaseFragment
 import com.myapps.pixabayeye.common.R
+import com.myapps.pixabayeye.common.ui.BaseFragment
 import com.myapps.pixabayeye.details.databinding.FragmentDetailsBinding
 import com.myapps.pixabayeye.domain.model.HitModel
 import com.myapps.pixabayeye.domain.util.tagsToList
@@ -26,7 +26,8 @@ class DetailsFragment : BaseFragment() {
     private val args: DetailsFragmentArgs by navArgs()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
