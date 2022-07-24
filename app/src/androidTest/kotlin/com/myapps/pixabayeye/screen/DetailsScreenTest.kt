@@ -10,6 +10,7 @@ import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
+import com.myapps.pixabayeye.clickOnViewChild
 import com.myapps.pixabayeye.details.R
 import com.myapps.pixabayeye.details.ui.DetailsFragment
 import com.myapps.pixabayeye.details.ui.DetailsFragmentArgs
@@ -72,8 +73,12 @@ class DetailsScreenTest {
         launchActivity()
         sleep(GETTING_DATA_DELAY)
         onView(withId(com.myapps.pixabayeye.search.R.id.recycler)).perform(
-            RecyclerViewActions.actionOnItemAtPosition<ItemsViewHolder>(1, click())
+            RecyclerViewActions.actionOnItemAtPosition<ItemsViewHolder>(
+                1,
+                clickOnViewChild(com.myapps.pixabayeye.search.R.id.previewImage)
+            )
         )
+        onView(withId(android.R.id.button1)).perform(click())
         onView(withId(R.id.detailsScrollView)).check(matches(isDisplayed()))
         pressBack()
         onView(withId(SearchR.id.searchContainer)).check(matches(isDisplayed()))

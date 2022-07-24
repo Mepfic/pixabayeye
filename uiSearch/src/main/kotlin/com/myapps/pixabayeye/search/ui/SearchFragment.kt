@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.myapps.pixabayeye.common.R
 import com.myapps.pixabayeye.common.ui.BaseFragment
 import com.myapps.pixabayeye.search.adapter.ImageAdapter
@@ -20,34 +21,18 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
 @ExperimentalCoroutinesApi
-class SearchFragment : BaseFragment() {
+class SearchFragment : BaseFragment<FragmentSearchBinding>() {
     private val viewModel: SearchViewModel by viewModels()
-    private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
     private lateinit var adapter: ImageAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
+        FragmentSearchBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = ImageAdapter { navigateToDetails(it) }
+        adapter = ImageAdapter({ showTransitionDialog(it) }, { viewModel.getImages(it) })
         binding.recycler.adapter = adapter
-        viewModel.dataFlow.collectWithViewLifecycle {
-            adapter.submitData(it)
-        }
         setListeners()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun setListeners() {
@@ -55,6 +40,7 @@ class SearchFragment : BaseFragment() {
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     query?.let { viewModel.getImages(it) }
+                    binding.root.hideKeyboard()
                     return true
                 }
 
@@ -62,8 +48,16 @@ class SearchFragment : BaseFragment() {
             })
             searchView.setOnClickListener { searchView.isIconified = false }
 
+            viewModel.dataFlow.collectWithViewLifecycle { adapter.submitData(it) }
+
+            viewModel.error.collectWithViewLifecycle { root.showSnackError(it.message) }
+
             adapter.loadStateFlow.collectWithViewLifecycle {
                 progressContainer.isVisible = it.refresh is LoadState.Loading
+                emptyText.isVisible = it.append is LoadState.NotLoading && adapter.itemCount < 1
+                (it.refresh as? LoadState.Error)?.let { errorState ->
+                    root.showSnackError(errorState.error.message.orEmpty())
+                }
             }
             swipeRefreshLayout.setOnRefreshListener {
                 adapter.refresh()
@@ -78,5 +72,18 @@ class SearchFragment : BaseFragment() {
             .fromUri(route.toUri())
             .build()
         findNavController().navigate(request)
+    }
+
+    private fun showTransitionDialog(itemId: Long) {
+        MaterialAlertDialogBuilder(requireContext(), R.style.MaterialAlertDialogTheme).apply {
+            setCancelable(true)
+            setTitle(R.string.dialog_message)
+            setNegativeButton(R.string.dialog_negative_button) { dialog, _ ->
+                dialog.cancel()
+            }
+            setPositiveButton(R.string.dialog_positive_button) { _, _ ->
+                navigateToDetails(itemId)
+            }
+        }.show()
     }
 }

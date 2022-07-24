@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListUpdateCallback
 import app.cash.turbine.test
 import com.myapps.pixabayeye.domain.ImagesUseCase
-import com.myapps.pixabayeye.domain.model.HitModel
+import com.myapps.pixabayeye.search.state.SearchItemState
+import com.myapps.pixabayeye.search.state.mapToSearchItemState
 import com.myapps.pixabayeye.search.ui.SearchViewModel
 import com.myapps.pixabayeye.test.common.MainCoroutineRule
 import com.myapps.pixabayeye.test.common.stub.StubModels.hitModels
@@ -43,7 +44,10 @@ class SearchViewModelTest {
                 )
                 skipItems(1)
                 differ.submitData(awaitItem())
-                assertEquals(expected = hitModels, actual = differ.snapshot().items)
+                assertEquals(
+                    expected = hitModels.map(mapToSearchItemState),
+                    actual = differ.snapshot().items
+                )
                 cancelAndConsumeRemainingEvents().size.also { size ->
                     assertEquals(expected = 0, actual = size)
                 }
@@ -53,11 +57,11 @@ class SearchViewModelTest {
     }
 
     companion object {
-        class HitItemDiffCallback : DiffUtil.ItemCallback<HitModel>() {
-            override fun areItemsTheSame(oldItem: HitModel, newItem: HitModel) =
+        class HitItemDiffCallback : DiffUtil.ItemCallback<SearchItemState>() {
+            override fun areItemsTheSame(oldItem: SearchItemState, newItem: SearchItemState) =
                 oldItem.imageId == newItem.imageId
 
-            override fun areContentsTheSame(oldItem: HitModel, newItem: HitModel) =
+            override fun areContentsTheSame(oldItem: SearchItemState, newItem: SearchItemState) =
                 oldItem == newItem
         }
 

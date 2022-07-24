@@ -6,18 +6,18 @@ import coil.request.CachePolicy
 import coil.transform.RoundedCornersTransformation
 import com.google.android.material.chip.Chip
 import com.myapps.pixabayeye.common.R
-import com.myapps.pixabayeye.domain.model.HitModel
-import com.myapps.pixabayeye.domain.util.tagsToList
 import com.myapps.pixabayeye.search.databinding.ItemSearchBinding
+import com.myapps.pixabayeye.search.state.SearchItemState
 
-class ItemsViewHolder(val binding: ItemSearchBinding) :
+class ItemsViewHolder(val binding: ItemSearchBinding, val onItemClick: (tag: String) -> Unit) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bindTo(item: HitModel?) {
+    fun bindTo(item: SearchItemState?) {
         binding.nameText.text = item?.userName
         binding.previewImage.load(item?.previewUrl) {
             crossfade(true)
             diskCachePolicy(CachePolicy.ENABLED)
             placeholder(R.drawable.ic_icon_placeholder)
+            error(R.drawable.ic_icon_placeholder)
             transformations(
                 RoundedCornersTransformation(
                     binding.root.context.resources
@@ -27,11 +27,11 @@ class ItemsViewHolder(val binding: ItemSearchBinding) :
             )
         }
         binding.tagsChipGroup.removeAllViews()
-        item?.tags?.tagsToList()?.forEach {
+        item?.tags?.forEach { tag ->
             Chip(binding.root.context).apply {
-                text = it
+                text = tag
                 binding.tagsChipGroup.addView(this)
-                isClickable = false
+                setOnClickListener { onItemClick(tag) }
             }
         }
     }

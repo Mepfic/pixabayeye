@@ -57,8 +57,8 @@ class ImagesRemoteMediator @AssistedInject constructor(
             return MediatorResult.Success(
                 endOfPaginationReached =
                 data.hits.size < pageSize ||
-                    data.totalHits <= pageIndex * pageSize ||
-                    loadType == LoadType.PREPEND
+                        data.totalHits <= pageIndex * pageSize ||
+                        loadType == LoadType.PREPEND
             )
         } catch (e: IOException) {
             return MediatorResult.Error(e)

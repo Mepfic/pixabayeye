@@ -6,6 +6,7 @@
     <dimen name="details_card_elevation">4dp</dimen>
     <dimen name="details_card_corner_radius">8dp</dimen>
     <dimen name="details_image_min_size">300dp</dimen>
+    <dimen name="search_view_elevation">8dp</dimen>
 
     <dimen name="space_extra_tiny">2dp</dimen>
     <dimen name="space_tiny">4dp</dimen>

@@ -11,7 +11,7 @@ import com.myapps.pixabayeye.data.database.model.HitEntity
 interface ImagesDao {
     @Query(
         "SELECT * FROM hits INNER JOIN search ON hits.imageId = search.imageId " +
-            "WHERE search.querySearch = :query"
+                "WHERE search.querySearch = :query"
     )
     fun getImagesByQuery(query: String): PagingSource<Int, HitEntity>
 

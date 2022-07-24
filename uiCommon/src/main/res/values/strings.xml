@@ -2,4 +2,9 @@
 <resources>
     <string name="search_hint">Example: fruits</string>
     <string name="author_name_prefix">by: %s</string>
+    <string name="dialog_message">Do you want to see more details?</string>
+    <string name="dialog_positive_button">Yes</string>
+    <string name="dialog_negative_button">No</string>
+    <string name="general_error_message">Something went wrong</string>
+    <string name="search_no_items_message">No items found</string>
 </resources>

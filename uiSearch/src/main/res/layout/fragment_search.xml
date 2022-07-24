@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/searchContainer"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background"
     android:fitsSystemWindows="false">
 
     <androidx.appcompat.widget.SearchView
@@ -14,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/space_small"
         android:layout_marginTop="@dimen/space_extra_small"
-        android:background="@color/cardview_light_background"
+        android:background="@color/colorSurface"
+        android:elevation="@dimen/search_view_elevation"
         app:layout_constraintTop_toTopOf="parent"
         app:queryHint="@string/search_hint" />
 
@@ -35,12 +35,25 @@
             tools:listitem="@layout/item_search" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <TextView
+        android:id="@+id/emptyText"
+        style="@style/Theme.PixabayEye.TextView.Body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_extra_small"
+        android:layout_marginTop="@dimen/space_medium"
+        android:gravity="center"
+        android:text="@string/search_no_items_message"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/searchView"
+        tools:visibility="visible" />
+
     <FrameLayout
         android:id="@+id/progressContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/space_extra_small"
-        android:background="@android:color/white"
+        android:background="@color/colorOnPrimary"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

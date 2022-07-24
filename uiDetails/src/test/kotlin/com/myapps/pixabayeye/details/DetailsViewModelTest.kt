@@ -1,6 +1,7 @@
 package com.myapps.pixabayeye.details
 
 import app.cash.turbine.test
+import com.myapps.pixabayeye.details.state.mapToDetailsState
 import com.myapps.pixabayeye.details.ui.DetailsViewModel
 import com.myapps.pixabayeye.domain.DetailsUseCase
 import com.myapps.pixabayeye.test.common.MainCoroutineRule
@@ -31,7 +32,10 @@ class DetailsViewModelTest {
             coEvery { detailsUseCase.invoke(testImageId) } returns StubModels.hitModel
             detailsViewModel.dataFlow.test {
                 detailsViewModel.getImages(testImageId)
-                assertEquals(expected = StubModels.hitModel, actual = awaitItem())
+                assertEquals(
+                    expected = StubModels.hitModel.let(mapToDetailsState),
+                    actual = awaitItem()
+                )
                 cancelAndConsumeRemainingEvents().size.also { size ->
                     assertEquals(expected = 0, actual = size)
                 }

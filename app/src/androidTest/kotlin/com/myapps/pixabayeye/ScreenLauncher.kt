@@ -23,7 +23,7 @@ inline fun <reified T : Fragment> launchFragmentInHiltContainer(
         )
     ).putExtra(
         "androidx.fragment.app.testing.FragmentScenario." +
-            "EmptyFragmentActivity.THEME_EXTRAS_BUNDLE_KEY",
+                "EmptyFragmentActivity.THEME_EXTRAS_BUNDLE_KEY",
         themeResId
     )
 
