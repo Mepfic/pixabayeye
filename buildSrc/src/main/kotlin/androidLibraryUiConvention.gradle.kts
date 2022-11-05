@@ -11,7 +11,7 @@ android {
 
 dependencies {
     implementation(Libraries.timber)
-    implementation(Libraries.lifecycleCommon)
+    implementation(Libraries.lifecycleViewModel)
     implementation(Libraries.lifecycleLivedataKtx)
     implementation(Libraries.lifecycleProcess)
     implementation(Libraries.lifecycleRuntimeKtx)
@@ -22,7 +22,4 @@ dependencies {
     implementation(Libraries.navigationUi)
     implementation(Libraries.navigationFragment)
     implementation(Libraries.coil)
-    implementation(Libraries.hilt)
-
-    kapt(Libraries.hiltCompiler)
 }

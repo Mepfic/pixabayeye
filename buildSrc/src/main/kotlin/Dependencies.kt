@@ -1,41 +1,43 @@
+import java.util.Properties
+
+private val versionsProperties = Properties().apply {
+    Versions::class.java.classLoader?.getResourceAsStream("build_versions.properties")
+        .use { load(it) }
+}
+
 private object Versions {
-    const val kotlin = "1.6.10"
+    val kotlin = versionsProperties["version.kotlin"].toString()
     const val kotlinxCoroutines = "1.6.3"
     const val kotlinxDateTime = "0.3.2"
     const val kotlinxSerialization = "1.3.2"
-    const val activity = "1.4.0"
-    const val coil = "2.0.0"
+    const val activity = "1.6.1"
+    const val coil = "2.2.2"
     const val coreKtx = "1.7.0"
     const val flowTestVersion = "0.8.0"
-    const val fragment = "1.4.1"
-    const val junit = "4.13.2"
-    const val lifecycle = "2.4.1"
-    const val material = "1.6.1"
+    const val fragment = "1.5.4"
+    const val lifecycle = "2.5.1"
+    const val material = "1.7.0"
     const val mockk = "1.12.4"
     const val retrofit = "2.9.0"
     const val moshiConverter = "2.9.0"
-    const val moshi = "1.12.0"
+    const val moshi = "1.14.0"
     const val loggingInterceptor = "4.10.0"
-    const val navigation = "2.4.2"
+    const val navigation = "2.5.3"
     const val paging = "3.1.1"
     const val swipeRefreshLayout = "1.1.0"
-    const val hilt = "2.38.1"
+    const val hilt = "2.44"
     const val timber = "5.0.1"
-    const val room = "2.4.2"
+    const val room = "2.4.3"
     const val androidTest = "1.4.0"
     const val androidTestRunner = "1.4.0"
-    const val androidTestRules = "1.4.0"
     const val androidTestTruth = "1.4.0"
-    const val androidTestJUnit = "1.1.3"
     const val espresso = "3.4.0"
-    const val uiAutomator = "2.2.0"
     const val hamcrest = "2.2"
     const val androidTestOrchestrator = "1.4.1"
 }
 
 object PluginVersions {
-    const val kotlin = Versions.kotlin
-    const val androidGradlePlugin = "7.1.3"
+    val androidGradlePlugin = versionsProperties["version.androidGradlePlugin"].toString()
     const val ktlint = "0.45.2"
     const val detekt = "1.20.0"
     const val hiltPlugin = Versions.hilt
@@ -43,9 +45,9 @@ object PluginVersions {
 
 object AndroidSdk {
     const val min = 23
-    const val compile = 32
-    const val target = 31
-    const val buildToolsVersion = "32.0.0"
+    const val compile = 33
+    const val target = 32
+    const val buildToolsVersion = "33.0.0"
 }
 
 object BuildPlugins {
@@ -61,9 +63,9 @@ object BuildPlugins {
         "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
     }
     val androidGradlePlugin by lazy { "com.android.tools.build:gradle:${PluginVersions.androidGradlePlugin}" }
-    val kotlinGradlePlugin by lazy { "org.jetbrains.kotlin:kotlin-gradle-plugin:${PluginVersions.kotlin}" }
+    val kotlinGradlePlugin by lazy { "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}" }
     val kotlinSerializationPlugin by lazy {
-        "org.jetbrains.kotlin:kotlin-serialization:${PluginVersions.kotlin}"
+        "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
     }
     val gradleHiltPlugin by lazy { "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}" }
 
@@ -75,11 +77,11 @@ object Libraries {
     val coil by lazy { "io.coil-kt:coil:${Versions.coil}" }
     val ktxCore by lazy { "androidx.core:core-ktx:${Versions.coreKtx}" }
     val material by lazy { "com.google.android.material:material:${Versions.material}" }
-    val lifecycleCommon by lazy { "androidx.lifecycle:lifecycle-common-java8:${Versions.lifecycle}" }
     val lifecycleLivedataKtx by lazy {
         "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     }
     val lifecycleProcess by lazy { "androidx.lifecycle:lifecycle-process:${Versions.lifecycle}" }
+    val lifecycleViewModel by lazy { "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}" }
     val lifecycleRuntimeKtx by lazy {
         "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     }

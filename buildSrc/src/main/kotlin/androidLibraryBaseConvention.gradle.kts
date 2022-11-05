@@ -20,7 +20,10 @@ android {
 
 dependencies {
     implementation(Libraries.timber)
-    implementation(Libraries.hilt)
+    implementation(Libraries.hilt) {
+        exclude(group = "androidx.lifecycle", module = "lifecycle-viewmodel")
+        exclude(group = "androidx.lifecycle", module = "lifecycle-viewmodel-ktx")
+    }
     implementation(Libraries.pagingRuntimeKtx)
 
     testImplementation(TestLibraries.kotlinReflect)

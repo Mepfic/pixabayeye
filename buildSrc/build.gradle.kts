@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.loadProperties
+
 repositories {
     google()
     mavenCentral()
@@ -7,7 +9,17 @@ plugins {
     `kotlin-dsl`
 }
 
-dependencies{
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
-    implementation("com.android.tools.build:gradle:7.1.3")
+val versions = loadProperties("$projectDir/src/main/resources/build_versions.properties")
+
+dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${versions["version.kotlin"]}")
+    implementation("com.android.tools.build:gradle:7.3.1")
+}
+
+configurations.all {
+    resolutionStrategy.eachDependency {
+        when (requested.name) {
+            "javapoet" -> useVersion("1.13.0") // workaround for hilt issue after v2.40.1
+        }
+    }
 }
