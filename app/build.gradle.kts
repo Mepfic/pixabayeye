@@ -45,7 +45,7 @@ android {
 
 dependencies {
     implementation(project(":uiSearch"))
-    implementation(project(":uiDetails"))
+    implementation(project(":uiDetailsCompose"))
 
     androidTestImplementation(project(":domain"))
     androidTestImplementation(project(":testCommon"))

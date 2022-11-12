@@ -30,7 +30,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = ImageAdapter({ showTransitionDialog(it) }, { viewModel.getImages(it) })
+        adapter = ImageAdapter({ navigateToDetails(it) }, { viewModel.getImages(it) })
         binding.recycler.adapter = adapter
         setListeners()
     }

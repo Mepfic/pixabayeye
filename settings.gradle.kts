@@ -6,5 +6,6 @@ include(
     ":uiCommon",
     ":uiSearch",
     ":uiDetails",
+    ":uiDetailsCompose",
     ":testCommon"
 )

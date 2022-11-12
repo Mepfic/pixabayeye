@@ -17,7 +17,6 @@ private object Versions {
     const val fragment = "1.5.4"
     const val lifecycle = "2.5.1"
     const val material = "1.7.0"
-    const val mockk = "1.12.4"
     const val retrofit = "2.9.0"
     const val moshiConverter = "2.9.0"
     const val moshi = "1.14.0"
@@ -28,9 +27,16 @@ private object Versions {
     const val hilt = "2.44"
     const val timber = "5.0.1"
     const val room = "2.4.3"
+    const val composeBom = "2022.10.00"
+    const val composeCompiler = "1.3.2"
+    const val composeConstraintLayout = "1.0.1"
+    const val composeLifecycle = "2.5.1"
+    const val composeLifecycleRuntime = "2.6.0-alpha03"
+
     const val androidTest = "1.4.0"
     const val androidTestRunner = "1.4.0"
     const val androidTestTruth = "1.4.0"
+    const val mockk = "1.12.4"
     const val espresso = "3.4.0"
     const val hamcrest = "2.2"
     const val androidTestOrchestrator = "1.4.1"
@@ -41,6 +47,7 @@ object PluginVersions {
     const val ktlint = "0.45.2"
     const val detekt = "1.20.0"
     const val hiltPlugin = Versions.hilt
+    const val composeCompiler = Versions.composeCompiler
 }
 
 object AndroidSdk {
@@ -68,13 +75,13 @@ object BuildPlugins {
         "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
     }
     val gradleHiltPlugin by lazy { "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}" }
-
 }
 
 object Libraries {
     val activityKtx by lazy { "androidx.activity:activity-ktx:${Versions.activity}" }
     val fragmentKtx by lazy { "androidx.fragment:fragment-ktx:${Versions.fragment}" }
     val coil by lazy { "io.coil-kt:coil:${Versions.coil}" }
+    val coilCompose by lazy { "io.coil-kt:coil-compose:${Versions.coil}" }
     val ktxCore by lazy { "androidx.core:core-ktx:${Versions.coreKtx}" }
     val material by lazy { "com.google.android.material:material:${Versions.material}" }
     val lifecycleLivedataKtx by lazy {
@@ -113,6 +120,20 @@ object Libraries {
     val roomRuntime by lazy { "androidx.room:room-runtime:${Versions.room}" }
     val roomCompiler by lazy { "androidx.room:room-compiler:${Versions.room}" }
     val roomPaging by lazy { "androidx.room:room-paging:${Versions.room}" }
+    val composeBom by lazy { "androidx.compose:compose-bom:${Versions.composeBom}" }
+    val composeUi = "androidx.compose.ui:ui"
+    val composeUiTooling = "androidx.compose.ui:ui-tooling"
+    val composeUiToolingPreview = "androidx.compose.ui:ui-tooling-preview"
+    val composeFoundation = "androidx.compose.foundation:foundation"
+    val composeFoundationLayout = "androidx.compose.foundation:foundation-layout"
+    val composeMaterial = "androidx.compose.material:material"
+    val composeMaterialIconCore = "androidx.compose.material:material-icons-core"
+    val composeAnimation = "androidx.compose.animation:animation"
+    val composeRuntime = "androidx.compose.runtime:runtime"
+    val composeConstraintLayout =
+        "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraintLayout}"
+    val composeLifecycle = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeLifecycle}"
+    val composeLifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.composeLifecycleRuntime}"
 }
 
 object TestLibraries {

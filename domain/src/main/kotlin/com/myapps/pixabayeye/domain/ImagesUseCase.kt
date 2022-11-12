@@ -6,8 +6,8 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
 class ImagesUseCase @Inject constructor(
-    private val imageRepository: ImagesRepository
+    private val repository: MainRepository
 ) {
     operator fun invoke(query: String): Flow<PagingData<HitModel>> =
-        imageRepository.getImages(query)
+        repository.getImages(query)
 }

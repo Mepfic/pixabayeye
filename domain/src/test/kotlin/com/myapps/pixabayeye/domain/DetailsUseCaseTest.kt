@@ -11,16 +11,16 @@ import kotlinx.coroutines.test.runTest
 
 class DetailsUseCaseTest {
 
-    private val detailsRepository = mockk<DetailsRepository>()
-    private val detailsUseCase by lazy { DetailsUseCase(detailsRepository) }
+    private val repository = mockk<MainRepository>()
+    private val detailsUseCase by lazy { DetailsUseCase(repository) }
 
     @ExperimentalCoroutinesApi
     @Test
     fun testUseCase() {
         runTest {
-            coEvery { detailsRepository.getImageById(any()) } returns hitModel
+            coEvery { repository.getImageById(any()) } returns hitModel
             assertEquals(expected = hitModel, actual = detailsUseCase.invoke(hitModel.imageId))
         }
-        coVerify(exactly = 1) { detailsRepository.getImageById(any()) }
+        coVerify(exactly = 1) { repository.getImageById(any()) }
     }
 }

@@ -2,6 +2,7 @@ import java.util.Properties
 
 plugins {
     androidLibraryBaseConvention
+    id(BuildPlugins.hiltPlugin)
 }
 
 android {

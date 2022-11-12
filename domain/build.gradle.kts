@@ -1,5 +1,6 @@
 plugins {
     androidLibraryBaseConvention
+    id(BuildPlugins.hiltPlugin)
 }
 
 android {

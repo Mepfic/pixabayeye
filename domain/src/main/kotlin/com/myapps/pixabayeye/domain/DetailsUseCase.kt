@@ -4,9 +4,8 @@ import com.myapps.pixabayeye.domain.model.HitModel
 import javax.inject.Inject
 
 class DetailsUseCase @Inject constructor(
-    private val detailsRepository: DetailsRepository
+    private val repository: MainRepository
 ) {
-
     suspend operator fun invoke(id: Long): HitModel =
-        detailsRepository.getImageById(id)
+        repository.getImageById(id)
 }

@@ -14,3 +14,7 @@ dependencies {
 
     testImplementation(project(":testCommon"))
 }
+//
+//hilt {
+//    enableExperimentalClasspathAggregation = true
+//}

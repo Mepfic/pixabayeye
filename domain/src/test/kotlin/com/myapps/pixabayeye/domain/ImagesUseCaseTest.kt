@@ -12,16 +12,16 @@ import kotlinx.coroutines.test.runTest
 
 class ImagesUseCaseTest {
 
-    private val imagesRepository = mockk<ImagesRepository>()
-    private val imagesUseCase by lazy { ImagesUseCase(imagesRepository) }
+    private val repository = mockk<MainRepository>()
+    private val imagesUseCase by lazy { ImagesUseCase(repository) }
 
     @ExperimentalCoroutinesApi
     @Test
     fun testUseCase() {
         runTest {
-            coEvery { imagesRepository.getImages(any()) } returns flowOf(PagingData.from(hitModels))
+            coEvery { repository.getImages(any()) } returns flowOf(PagingData.from(hitModels))
             imagesUseCase.invoke("")
-            coVerify(exactly = 1) { imagesRepository.getImages(any()) }
+            coVerify(exactly = 1) { repository.getImages(any()) }
         }
     }
 }
