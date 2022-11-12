@@ -23,8 +23,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-//        maven { url = uri("https://nexus.pentaho.org/content/groups/omni/") }
-        maven { url = uri("https://jitpack.io") }
     }
 
     apply(from = "$rootDir/ktlint.gradle.kts")

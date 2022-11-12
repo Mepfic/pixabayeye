@@ -18,6 +18,14 @@ android {
         testInstrumentationRunner = "com.myapps.pixabayeye.AppTestRunner"
     }
 
+    flavorDimensions.apply {
+        add(UiDimension.DIMENSION)
+    }
+
+    productFlavors {
+        UiDimension.addProductFlavors(this)
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
@@ -45,7 +53,7 @@ android {
 
 dependencies {
     implementation(project(":uiSearch"))
-    implementation(project(":uiDetailsCompose"))
+    uiImplementation(UiFeatures.DETAILS)
 
     androidTestImplementation(project(":domain"))
     androidTestImplementation(project(":testCommon"))
