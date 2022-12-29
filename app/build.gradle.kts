@@ -53,7 +53,7 @@ android {
 
 dependencies {
     implementation(project(":uiSearch"))
-    uiImplementation(UiFeatures.DETAILS)
+    implementation(project(":uiDetails"))
 
     androidTestImplementation(project(":domain"))
     androidTestImplementation(project(":testCommon"))
@@ -65,6 +65,25 @@ dependencies {
     implementation(Libraries.hilt)
     implementation(Libraries.navigationFragment)
     implementation(Libraries.navigationUi)
+
+    implementation(Libraries.composeUi)
+    implementation(Libraries.composeActivity)
+    implementation(Libraries.composeNavigation)
+    implementation(Libraries.composeHiltNavigation)
+    implementation(Libraries.accompanistNavigation)
+    implementation(Libraries.composeUiToolingPreview)
+    implementation(Libraries.composeFoundation)
+    implementation(Libraries.composeFoundationLayout)
+    implementation(Libraries.composeMaterial)
+    implementation(Libraries.composeMaterialIconCore)
+    implementation(Libraries.composeAnimation)
+    implementation(Libraries.composeRuntime)
+    implementation(Libraries.composeConstraintLayout)
+    implementation(Libraries.composeLifecycle)
+    implementation(Libraries.composeLifecycleRuntime)
+    implementation(Libraries.coilCompose)
+
+    debugImplementation(Libraries.composeUiTooling)
 
     androidTestImplementation(Libraries.pagingRuntimeKtx)
     androidTestImplementation(TestLibraries.androidTestCore)

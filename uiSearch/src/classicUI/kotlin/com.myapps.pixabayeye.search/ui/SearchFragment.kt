@@ -50,7 +50,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>() {
 
             viewModel.dataFlow.collectWithViewLifecycle { adapter.submitData(it) }
 
-            viewModel.error.collectWithViewLifecycle { root.showSnackError(it.message) }
+//            viewModel.error.collectWithViewLifecycle { root.showSnackError(it.message) }
 
             adapter.loadStateFlow.collectWithViewLifecycle {
                 progressContainer.isVisible = it.refresh is LoadState.Loading

@@ -13,7 +13,7 @@ val versions = loadProperties("$projectDir/src/main/resources/build_versions.pro
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${versions["version.kotlin"]}")
-    implementation("com.android.tools.build:gradle:7.3.1")
+    implementation("com.android.tools.build:gradle:${versions["version.androidGradlePlugin"]}")
 }
 
 configurations.all {

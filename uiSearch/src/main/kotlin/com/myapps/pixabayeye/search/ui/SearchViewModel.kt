@@ -1,10 +1,10 @@
 package com.myapps.pixabayeye.search.ui
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
-import com.myapps.pixabayeye.common.ui.BaseViewModel
 import com.myapps.pixabayeye.domain.ImagesUseCase
 import com.myapps.pixabayeye.search.state.SearchItemState
 import com.myapps.pixabayeye.search.state.mapToSearchItemState
@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.stateIn
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val imagesUseCase: ImagesUseCase,
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val query = MutableStateFlow(INIT_QUERY_VALUE)
 
@@ -31,7 +31,7 @@ class SearchViewModel @Inject constructor(
         .flatMapLatest { query -> imagesUseCase.invoke(query).map { it.map(mapToSearchItemState) } }
         .cachedIn(viewModelScope)
         .catch { throwable ->
-            emitError(ErrorState(throwable, throwable.message.orEmpty()))
+//            emitError(ErrorState(throwable, throwable.message.orEmpty()))
         }
         .stateIn(viewModelScope, started = SharingStarted.Lazily, PagingData.empty())
 

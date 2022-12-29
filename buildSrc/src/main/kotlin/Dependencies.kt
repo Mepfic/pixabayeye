@@ -27,11 +27,15 @@ private object Versions {
     const val hilt = "2.44"
     const val timber = "5.0.1"
     const val room = "2.4.3"
-    const val composeBom = "2022.10.00"
+    const val composeBom = "2022.11.00"
     const val composeCompiler = "1.3.2"
     const val composeConstraintLayout = "1.0.1"
     const val composeLifecycle = "2.5.1"
     const val composeLifecycleRuntime = "2.6.0-alpha03"
+    const val composeActivity = "1.6.1"
+    const val composeNavigation = "2.5.3"
+    const val composeHiltNavigation = "1.0.0"
+    const val accompanist = "0.27.0"
 
     const val androidTest = "1.4.0"
     const val androidTestRunner = "1.4.0"
@@ -134,6 +138,10 @@ object Libraries {
         "androidx.constraintlayout:constraintlayout-compose:${Versions.composeConstraintLayout}"
     val composeLifecycle = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeLifecycle}"
     val composeLifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-compose:${Versions.composeLifecycleRuntime}"
+    val composeActivity = "androidx.activity:activity-compose:${Versions.composeActivity}"
+    val composeNavigation = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
+    val composeHiltNavigation = "androidx.hilt:hilt-navigation-compose:${Versions.composeHiltNavigation}"
+    val accompanistNavigation = "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist}"
 }
 
 object TestLibraries {
