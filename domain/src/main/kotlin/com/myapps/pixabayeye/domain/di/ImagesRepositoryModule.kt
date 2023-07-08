@@ -15,6 +15,6 @@ interface ImagesRepositoryModule {
 
     @Binds
     fun bindImagesRepository(
-        imagesRepository: ImagesRepositoryImpl
+        imagesRepository: ImagesRepositoryImpl,
     ): ImagesRepository
 }

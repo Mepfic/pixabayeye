@@ -10,13 +10,15 @@ internal class ApiLogger : HttpLoggingInterceptor.Logger {
 
     @Suppress("MagicNumber", "SwallowedException")
     override fun log(message: String) {
-        if (message.startsWith("{") || message.startsWith("["))
+        if (message.startsWith("{") || message.startsWith("[")) {
             try {
                 JSONObject(message).toString(4).also { print(it) }
             } catch (e: JSONException) {
                 print(message)
             }
-        else print(message)
+        } else {
+            print(message)
+        }
     }
 
     private fun print(message: String) {

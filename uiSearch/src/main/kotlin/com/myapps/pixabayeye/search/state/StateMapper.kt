@@ -8,6 +8,6 @@ internal val mapToSearchItemState = { model: HitModel ->
         imageId = model.imageId,
         userName = model.userName,
         tags = model.tags.tagsToList(),
-        previewUrl = model.previewUrl,
+        previewUrl = model.previewUrl
     )
 }

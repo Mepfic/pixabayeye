@@ -5,14 +5,14 @@ import com.myapps.pixabayeye.details.state.DetailsState
 import com.myapps.pixabayeye.details.state.mapToDetailsState
 import com.myapps.pixabayeye.domain.DetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
-    private val detailsUseCase: DetailsUseCase
+    private val detailsUseCase: DetailsUseCase,
 ) : BaseViewModel() {
 
     private val _dataFlow = MutableSharedFlow<DetailsState>(replay = 1)

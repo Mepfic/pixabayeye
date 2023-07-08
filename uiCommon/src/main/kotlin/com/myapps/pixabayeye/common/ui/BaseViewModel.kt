@@ -22,7 +22,7 @@ abstract class BaseViewModel : ViewModel() {
     protected fun <T : Any> MutableSharedFlow<T>.launchInViewModelScope(
         errorMessage: String? = null,
         errorAction: (() -> Unit)? = null,
-        block: suspend () -> T
+        block: suspend () -> T,
     ) {
         viewModelScope.launch {
             runCatching {
@@ -45,6 +45,6 @@ abstract class BaseViewModel : ViewModel() {
     data class ErrorState(
         val throwable: Throwable,
         val message: String,
-        val action: (() -> Unit)? = null
+        val action: (() -> Unit)? = null,
     )
 }

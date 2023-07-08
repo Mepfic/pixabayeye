@@ -15,6 +15,6 @@ interface DetailsRepositoryModule {
 
     @Binds
     fun bindDetailsRepository(
-        detailsRepository: DetailsRepositoryImpl
+        detailsRepository: DetailsRepositoryImpl,
     ): DetailsRepository
 }

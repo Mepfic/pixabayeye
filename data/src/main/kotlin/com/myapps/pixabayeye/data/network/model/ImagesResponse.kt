@@ -7,5 +7,5 @@ import com.squareup.moshi.JsonClass
 data class ImagesResponse(
     @Json(name = "total") val total: Int,
     @Json(name = "totalHits") val totalHits: Int,
-    @Json(name = "hits") val hits: List<HitResponse>
+    @Json(name = "hits") val hits: List<HitResponse>,
 )

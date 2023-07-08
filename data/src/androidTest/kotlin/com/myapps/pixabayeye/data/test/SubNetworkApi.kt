@@ -8,7 +8,7 @@ class SubNetworkApi : MainNetworkApi {
         key: String,
         query: String,
         perPage: Int,
-        page: Int
+        page: Int,
     ): ImagesResponse {
         return ImagesResponse(
             total = 1000,

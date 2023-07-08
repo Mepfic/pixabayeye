@@ -17,14 +17,14 @@ import com.myapps.pixabayeye.data.network.model.mapResponseToHitEntity
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 @ExperimentalPagingApi
 class ImagesRemoteMediator @AssistedInject constructor(
     private val database: AppDatabase,
     private val mainNetworkApi: MainNetworkApi,
-    @Assisted private val query: String
+    @Assisted private val query: String,
 ) : RemoteMediator<Int, HitEntity>() {
 
     private val imagesDao: ImagesDao = database.imagesDao()
@@ -35,14 +35,15 @@ class ImagesRemoteMediator @AssistedInject constructor(
     @Suppress("ReturnCount")
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, HitEntity>
+        state: PagingState<Int, HitEntity>,
     ): MediatorResult {
         pageIndex = getPageIndex(loadType).coerceAtLeast(1)
         val pageSize = state.config.pageSize
 
         try {
-            if (loadType == LoadType.PREPEND)
+            if (loadType == LoadType.PREPEND) {
                 return MediatorResult.Success(endOfPaginationReached = true)
+            }
 
             val data = fetchImages(pageSize, pageIndex)
 
@@ -57,8 +58,8 @@ class ImagesRemoteMediator @AssistedInject constructor(
             return MediatorResult.Success(
                 endOfPaginationReached =
                 data.hits.size < pageSize ||
-                        data.totalHits <= pageIndex * pageSize ||
-                        loadType == LoadType.PREPEND
+                    data.totalHits <= pageIndex * pageSize ||
+                    loadType == LoadType.PREPEND
             )
         } catch (e: IOException) {
             return MediatorResult.Error(e)

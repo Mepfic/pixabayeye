@@ -1,17 +1,17 @@
-//pluginManagement {
+// pluginManagement {
 //    repositories {
 //        gradlePluginPortal()
 //        google()
 //        mavenCentral()
 //    }
-//}
-//dependencyResolutionManagement {
+// }
+// dependencyResolutionManagement {
 //    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 //    repositories {
 //        google()
 //        mavenCentral()
 //    }
-//}
+// }
 rootProject.name = "PixabayEye"
 include(
     ":app",
@@ -20,5 +20,5 @@ include(
     ":uiCommon",
     ":uiSearch",
     ":uiDetails",
-    ":testCommon",
+    ":testCommon"
 )
