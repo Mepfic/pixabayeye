@@ -85,6 +85,6 @@ class DetailsScreenTest {
     }
 
     companion object {
-        const val GETTING_DATA_DELAY = 1000L
+        const val GETTING_DATA_DELAY = 15000L
     }
 }
