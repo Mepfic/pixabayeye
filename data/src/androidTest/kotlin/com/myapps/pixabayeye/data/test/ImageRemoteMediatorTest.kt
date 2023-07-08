@@ -8,12 +8,12 @@ import androidx.paging.RemoteMediator.MediatorResult
 import com.myapps.pixabayeye.data.database.AppDatabase
 import com.myapps.pixabayeye.data.database.model.HitEntity
 import com.myapps.pixabayeye.data.datasource.ImagesRemoteMediator
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runTest
 import kotlin.test.AfterTest
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runTest
 
 @ExperimentalPagingApi
 @ExperimentalCoroutinesApi

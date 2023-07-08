@@ -25,7 +25,7 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = getViewBinding(inflater, container)
         return binding.root
@@ -40,7 +40,8 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
 
     protected fun View.hideKeyboard() {
         val imm = ContextCompat.getSystemService(
-            context, InputMethodManager::class.java
+            context,
+            InputMethodManager::class.java
         ) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
     }

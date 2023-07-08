@@ -14,7 +14,7 @@ import com.myapps.pixabayeye.ui.MainActivity
 inline fun <reified T : Fragment> launchFragmentInHiltContainer(
     fragmentArgs: Bundle? = null,
     @StyleRes themeResId: Int = androidx.appcompat.R.style.Theme_AppCompat_DayNight_NoActionBar,
-    crossinline action: Fragment.() -> Unit = {}
+    crossinline action: Fragment.() -> Unit = {},
 ) {
     val startActivityIntent = Intent.makeMainActivity(
         ComponentName(

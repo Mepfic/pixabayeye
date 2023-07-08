@@ -9,9 +9,9 @@ import com.myapps.pixabayeye.data.database.dao.ImagesDao
 import com.myapps.pixabayeye.data.datasource.ImagesRemoteMediator
 import com.myapps.pixabayeye.domain.model.HitModel
 import com.myapps.pixabayeye.domain.model.mapEntityToHitModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 @ExperimentalPagingApi
 class ImagesRepositoryImpl @Inject constructor(

@@ -8,7 +8,7 @@ tasks.register("codeFormatAndCheck") {
             "lintFix",
             "ktlintCheck",
             "lint",
-            "detekt",
+            "detekt"
         )
     }
 }
@@ -18,7 +18,7 @@ tasks.register("allTest") {
         gradlew(
             "clean",
             "testDebugUnitTest",
-            "connectedAndroidTest",
+            "connectedAndroidTest"
         )
     }
 }
@@ -27,7 +27,7 @@ fun gradlew(vararg tasks: String) {
     exec {
         executable = File(
             project.rootDir,
-            if (Os.isFamily(Os.FAMILY_WINDOWS)) "gradlew.bat" else "gradlew",
+            if (Os.isFamily(Os.FAMILY_WINDOWS)) "gradlew.bat" else "gradlew"
         )
             .also { it.setExecutable(true) }
             .absolutePath

@@ -21,6 +21,6 @@ abstract class StubRepositoryModule {
     @Singleton
     @Binds
     abstract fun bindDetailsRepository(
-        repository: StubDetailsRepository
+        repository: StubDetailsRepository,
     ): DetailsRepository
 }

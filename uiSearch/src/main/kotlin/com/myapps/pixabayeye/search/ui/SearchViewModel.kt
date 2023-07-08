@@ -9,7 +9,6 @@ import com.myapps.pixabayeye.domain.ImagesUseCase
 import com.myapps.pixabayeye.search.state.SearchItemState
 import com.myapps.pixabayeye.search.state.mapToSearchItemState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,6 +17,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @HiltViewModel

@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 @ExperimentalPagingApi
 class DetailsRepositoryImpl @Inject constructor(
-    private val imagesDao: ImagesDao
+    private val imagesDao: ImagesDao,
 ) : DetailsRepository {
 
     override suspend fun getImageById(id: Long): HitModel =

@@ -66,7 +66,6 @@ object BuildPlugins {
         "org.jetbrains.kotlin:kotlin-serialization:${PluginVersions.kotlin}"
     }
     val gradleHiltPlugin by lazy { "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}" }
-
 }
 
 object Libraries {
