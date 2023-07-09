@@ -2,6 +2,4 @@ plugins {
     androidLibraryUiConvention
 }
 
-android {
-    namespace = "com.myapps.pixabayeye.common"
-}
+android.namespace = "com.myapps.pixabayeye.common"

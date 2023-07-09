@@ -7,6 +7,8 @@ plugins {
 android {
     namespace = "com.myapps.pixabayeye.data"
 
+    buildFeatures.buildConfig = true
+
     defaultConfig {
         file("$rootDir/buildSrc/src/keys/apikeys.properties").let { file ->
             if (file.exists()) {
@@ -16,28 +18,24 @@ android {
                 buildConfigField("String", "API_KEY", key)
             }
         }
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 }
 
 dependencies {
     androidTestImplementation(project(":testCommon"))
 
-    implementation(Libraries.moshiKotlin)
-    implementation(Libraries.moshiConverter)
-    implementation(Libraries.retrofit)
-    implementation(Libraries.loggingInterceptor)
-    implementation(Libraries.roomKtx)
-    implementation(Libraries.roomRuntime)
-    implementation(Libraries.roomPaging)
-    implementation(TestLibraries.kotlinReflect)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.kotlin.reflect)
+    implementation(libs.moshi.kotlin)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.room.ktx)
+    implementation(libs.room.paging)
+    implementation(libs.room.runtime)
 
-    androidTestImplementation(TestLibraries.kotlinTest)
-    androidTestImplementation(TestLibraries.kotlinxCoroutinesTest)
-    androidTestImplementation(TestLibraries.roomTesting)
-    androidTestImplementation(TestLibraries.androidTestRunner)
-    androidTestImplementation(TestLibraries.androidTestCore)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.room.testing)
 
-    kapt(Libraries.roomCompiler)
+    kapt(libs.room.compiler)
 }

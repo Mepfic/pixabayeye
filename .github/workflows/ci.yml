@@ -23,7 +23,7 @@ jobs:
 
       - uses: android-actions/setup-android@v2
 
-      - run: bash ./gradlew ktlintCheck lint detekt --stacktrace
+      - run: bash ./gradlew ktlintCheck detekt lint --stacktrace
 
 
 
@@ -65,7 +65,7 @@ jobs:
 
       - uses: android-actions/setup-android@v2
 
-      - run: bash ./gradlew assembleDebug assembleAndroidTest --stacktrace
+      - run: bash ./gradlew assembleDebug assembleRelease assembleAndroidTest --stacktrace
 
 
 
@@ -85,6 +85,8 @@ jobs:
           java-version: '17'
 
       - uses: android-actions/setup-android@v2
+
+      - run: bash ./gradlew assembleAndroidTest --stacktrace
 
       - uses: ReactiveCircus/android-emulator-runner@v2
         with:

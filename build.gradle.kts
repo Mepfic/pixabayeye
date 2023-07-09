@@ -1,32 +1,23 @@
 buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-
     dependencies {
-        classpath(BuildPlugins.androidGradlePlugin)
-        classpath(BuildPlugins.kotlinGradlePlugin)
-        classpath(BuildPlugins.kotlinSerializationPlugin)
-        classpath(BuildPlugins.navigationSafeArgsGradlePlugin)
-        classpath(BuildPlugins.gradleHiltPlugin)
+        classpath(libs.android.gradle.plugin)
+        classpath(libs.androidx.navigation.safeArgsGradlePlugin)
+        classpath(libs.hilt.android.gradle.plugin)
+        classpath(libs.javapoet)
+        classpath(libs.kotlin.gradle.plugin)
+        classpath(libs.kotlin.serialization)
     }
 }
 
 plugins {
-    id(BuildPlugins.detektPlugin) version (PluginVersions.detekt)
+    alias(libs.plugins.detekt)
 }
 
 apply(from = "$rootDir/ci.gradle.kts")
 
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-
-    apply(from = "$rootDir/ktlint.gradle.kts")
-    apply(plugin = BuildPlugins.detektPlugin)
+    apply(plugin = "io.gitlab.arturbosch.detekt")
+    apply(from = "$rootDir/ktlint.gradle")
 
     detekt {
         parallel = true

@@ -1,16 +1,14 @@
 plugins {
     androidLibraryUiConvention
-    id(BuildPlugins.navigationSafeArgs)
-    id(BuildPlugins.hiltPlugin)
+    id("androidx.navigation.safeargs.kotlin")
+    id("dagger.hilt.android.plugin")
 }
 
-android {
-    namespace = "com.myapps.pixabayeye.details"
-}
+android.namespace = "com.myapps.pixabayeye.details"
 
 dependencies {
-    implementation(project(":uiCommon"))
     implementation(project(":domain"))
+    implementation(project(":uiCommon"))
 
     testImplementation(project(":testCommon"))
 }

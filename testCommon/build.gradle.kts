@@ -2,15 +2,13 @@ plugins {
     androidLibraryUiConvention
 }
 
-android {
-    namespace = "com.myapps.pixabayeye.test.common"
-}
+android.namespace = "com.myapps.pixabayeye.test.common"
 
 dependencies {
-    implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(project(":domain"))
 
-    implementation(TestLibraries.kotlinReflect)
-    implementation(TestLibraries.kotlinTest)
-    implementation(TestLibraries.kotlinxCoroutinesTest)
+    implementation(libs.kotlin.reflect)
+    implementation(libs.kotlin.test.junit)
+    implementation(libs.kotlinx.coroutines.test)
 }

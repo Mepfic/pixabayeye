@@ -1,28 +1,23 @@
+val libs = project.extensions.getByType<VersionCatalogsExtension>().named("libs")
+
 plugins {
     id("androidLibraryBaseConvention")
 }
 
-android {
-    @Suppress("UnstableApiUsage")
-    buildFeatures {
-        viewBinding = true
-    }
-}
+android.buildFeatures.viewBinding = true
 
 dependencies {
-    implementation(Libraries.timber)
-    implementation(Libraries.lifecycleCommon)
-    implementation(Libraries.lifecycleLivedataKtx)
-    implementation(Libraries.lifecycleProcess)
-    implementation(Libraries.lifecycleRuntimeKtx)
-    implementation(Libraries.activityKtx)
-    implementation(Libraries.fragmentKtx)
-    implementation(Libraries.material)
-    implementation(Libraries.swipeRefreshLayout)
-    implementation(Libraries.navigationUi)
-    implementation(Libraries.navigationFragment)
-    implementation(Libraries.coil)
-    implementation(Libraries.hilt)
+    implementation(libs.findLibrary("android-material").get())
+    implementation(libs.findLibrary("androidx-activity-ktx").get())
+    implementation(libs.findLibrary("androidx-fragment-ktx").get())
+    implementation(libs.findLibrary("androidx-lifecycle-process").get())
+    implementation(libs.findLibrary("androidx-lifecycle-runtime-ktx").get())
+    implementation(libs.findLibrary("androidx-navigation-fragment-ktx").get())
+    implementation(libs.findLibrary("androidx-navigation-ui-ktx").get())
+    implementation(libs.findLibrary("androidx-swiperefreshlayout").get())
+    implementation(libs.findLibrary("coil").get())
+    implementation(libs.findLibrary("hilt-android").get())
+    implementation(libs.findLibrary("timber").get())
 
-    kapt(Libraries.hiltCompiler)
+    kapt(libs.findLibrary("hilt-android-compiler").get())
 }
