@@ -1,24 +1,26 @@
-// pluginManagement {
-//    repositories {
-//        gradlePluginPortal()
-//        google()
-//        mavenCentral()
-//    }
-// }
-// dependencyResolutionManagement {
-//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-//    repositories {
-//        google()
-//        mavenCentral()
-//    }
-// }
 rootProject.name = "PixabayEye"
+
+pluginManagement {
+    repositories {
+        google()
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
 include(
     ":app",
     ":data",
     ":domain",
+    ":testCommon",
     ":uiCommon",
-    ":uiSearch",
     ":uiDetails",
-    ":testCommon"
+    ":uiSearch"
 )

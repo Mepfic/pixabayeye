@@ -8,6 +8,7 @@ plugins {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
-    implementation("com.android.tools.build:gradle:7.1.3")
+    implementation(buildSrcLibs.android.gradle.plugin)
+    implementation(buildSrcLibs.javapoet)
+    implementation(buildSrcLibs.kotlin.gradle.plugin)
 }

@@ -1,17 +1,16 @@
 plugins {
     kotlin("android")
     kotlin("kapt")
-    id(BuildPlugins.androidApplication)
-    id(BuildPlugins.hiltPlugin)
+    id("com.android.application")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
     namespace = "com.myapps.pixabayeye"
-    compileSdk = AndroidSdk.compile
-    buildToolsVersion = AndroidSdk.buildToolsVersion
+    compileSdk = libs.versions.android.build.compileSdk.get().toInt()
     defaultConfig {
-        minSdk = AndroidSdk.min
-        targetSdk = AndroidSdk.target
+        minSdk = libs.versions.android.build.minSdk.get().toInt()
+        targetSdk = libs.versions.android.build.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -29,8 +28,11 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.valueOf(libs.versions.build.javaVersion.get())
+        targetCompatibility = JavaVersion.valueOf(libs.versions.build.javaVersion.get())
+    }
+    kotlinOptions {
+        jvmTarget = libs.versions.build.jvmTarget.get()
     }
 
     testOptions {
@@ -45,35 +47,34 @@ android {
 }
 
 dependencies {
-    implementation(project(":uiSearch"))
     implementation(project(":uiDetails"))
+    implementation(project(":uiSearch"))
 
     androidTestImplementation(project(":domain"))
     androidTestImplementation(project(":testCommon"))
     androidTestImplementation(project(":uiCommon"))
 
-    implementation(Libraries.activityKtx)
-    implementation(Libraries.fragmentKtx)
-    implementation(Libraries.material)
-    implementation(Libraries.hilt)
-    implementation(Libraries.navigationFragment)
-    implementation(Libraries.navigationUi)
+    implementation(libs.android.material)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.hilt.android)
 
-    androidTestImplementation(Libraries.pagingRuntimeKtx)
-    androidTestImplementation(TestLibraries.androidTestCore)
-    androidTestImplementation(TestLibraries.androidTestRunner)
-    androidTestImplementation(TestLibraries.espressoCore)
-    androidTestImplementation(TestLibraries.espressoContrib)
-    androidTestImplementation(TestLibraries.espressoIntents)
-    androidTestImplementation(TestLibraries.fragmentTesting)
-    androidTestImplementation(TestLibraries.hiltTesting)
-    androidTestImplementation(TestLibraries.hamcrest)
+    androidTestImplementation(libs.androidx.fragment.testing)
+    androidTestImplementation(libs.androidx.paging.runtime.ktx)
+    androidTestImplementation(libs.androidx.test.core)
+    androidTestImplementation(libs.androidx.test.espresso.contrib)
+    androidTestImplementation(libs.androidx.test.espresso.core)
+    androidTestImplementation(libs.androidx.test.espresso.intents)
+    androidTestImplementation(libs.hamcrest)
+    androidTestImplementation(libs.hilt.android.testing)
 
-    debugImplementation(TestLibraries.fragmentTesting)
-    androidTestUtil(TestLibraries.androidTestOrchestrator)
+    debugImplementation(libs.androidx.fragment.testing)
+    androidTestUtil(libs.androidx.test.orchestrator)
 
-    kapt(Libraries.hiltCompiler)
-    kaptAndroidTest(Libraries.hiltCompiler)
+    kapt(libs.hilt.android.compiler)
+    kaptAndroidTest(libs.hilt.android.compiler)
 }
 
 hilt {

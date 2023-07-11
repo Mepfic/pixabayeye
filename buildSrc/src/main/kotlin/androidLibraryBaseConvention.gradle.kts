@@ -1,3 +1,5 @@
+val libs = project.extensions.getByType<VersionCatalogsExtension>().named("libs")
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -5,32 +7,42 @@ plugins {
 }
 
 android {
-    compileSdk = AndroidSdk.compile
-    buildToolsVersion = AndroidSdk.buildToolsVersion
+    compileSdk = libs.findVersion("android-build-compileSdk").get().requiredVersion.toInt()
     defaultConfig {
-        minSdk = AndroidSdk.min
-        targetSdk = AndroidSdk.target
+        minSdk = libs.findVersion("android-build-minSdk").get().requiredVersion.toInt()
+        defaultConfig.testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.valueOf(
+            libs.findVersion("build-javaVersion").get().requiredVersion
+        )
+        targetCompatibility = JavaVersion.valueOf(
+            libs.findVersion("build-javaVersion").get().requiredVersion
+        )
+    }
+    kotlinOptions {
+        jvmTarget = libs.findVersion("build-jvmTarget").get().requiredVersion
     }
 }
 
 dependencies {
-    implementation(Libraries.timber)
-    implementation(Libraries.hilt)
-    implementation(Libraries.pagingRuntimeKtx)
+    implementation(libs.findLibrary("androidx-paging-runtime-ktx").get())
+    implementation(libs.findLibrary("hilt-android").get())
+    implementation(libs.findLibrary("kotlinx-coroutines-core").get())
+    implementation(libs.findLibrary("timber").get())
 
-    testImplementation(TestLibraries.kotlinReflect)
-    testImplementation(TestLibraries.kotlinTest)
-    testImplementation(TestLibraries.kotlinxCoroutinesTest)
-    testImplementation(TestLibraries.mockk)
-    testImplementation(TestLibraries.mockkAndroid)
-    testImplementation(TestLibraries.flowTest)
-    testImplementation(TestLibraries.androidTestCore)
-    testImplementation(TestLibraries.androidTestExtTruth)
+    testImplementation(libs.findLibrary("androidx-test-core").get())
+    testImplementation(libs.findLibrary("androidx-test-truth").get())
+    testImplementation(libs.findLibrary("kotlin-reflect").get())
+    testImplementation(libs.findLibrary("kotlin-test-junit").get())
+    testImplementation(libs.findLibrary("kotlinx-coroutines-test").get())
+    testImplementation(libs.findLibrary("mockk").get())
+    testImplementation(libs.findLibrary("mockk-android").get())
+    testImplementation(libs.findLibrary("turbine").get())
 
-    kapt(Libraries.hiltCompiler)
+    androidTestImplementation(libs.findLibrary("androidx-test-espresso-core").get())
+    androidTestImplementation(libs.findLibrary("kotlin-test-junit").get())
+
+    kapt(libs.findLibrary("hilt-android-compiler").get())
 }
