@@ -1,10 +1,11 @@
 package com.myapps.pixabayeye.search
 
-import androidx.paging.AsyncPagingDataDiffer
-import androidx.paging.PagingData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.testing.asPagingSourceFactory
+import androidx.paging.testing.asSnapshot
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListUpdateCallback
-import app.cash.turbine.test
 import com.myapps.pixabayeye.domain.ImagesUseCase
 import com.myapps.pixabayeye.search.state.SearchItemState
 import com.myapps.pixabayeye.search.state.mapToSearchItemState
@@ -15,8 +16,6 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import kotlin.test.Test
@@ -34,24 +33,16 @@ class SearchViewModelTest {
     @Test
     fun testSuccessState() {
         runTest {
-            coEvery { imagesUseCase.invoke(any()) } returns flowOf(PagingData.from(hitModels))
-            searchViewModel.dataFlow.test {
-                val differ = AsyncPagingDataDiffer(
-                    diffCallback = HitItemDiffCallback(),
-                    updateCallback = NoopListCallback(),
-                    mainDispatcher = StandardTestDispatcher(),
-                    workerDispatcher = StandardTestDispatcher()
-                )
-                skipItems(1)
-                differ.submitData(awaitItem())
-                assertEquals(
-                    expected = hitModels.map(mapToSearchItemState),
-                    actual = differ.snapshot().items
-                )
-                cancelAndConsumeRemainingEvents().size.also { size ->
-                    assertEquals(expected = 0, actual = size)
-                }
-            }
+            val pager = Pager(
+                config = PagingConfig(pageSize = 1),
+                pagingSourceFactory = hitModels.asPagingSourceFactory()
+            )
+            coEvery { imagesUseCase.invoke(any()) } returns pager.flow
+            val actual = searchViewModel.dataFlow.asSnapshot()
+            assertEquals(
+                expected = hitModels.map(mapToSearchItemState),
+                actual = actual
+            )
             coVerify(exactly = 1) { imagesUseCase.invoke(any()) }
         }
     }
