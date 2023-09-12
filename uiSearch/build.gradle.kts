@@ -11,4 +11,5 @@ dependencies {
     implementation(project(":uiCommon"))
 
     testImplementation(project(":testCommon"))
+    testImplementation(libs.androidx.paging.testing)
 }
