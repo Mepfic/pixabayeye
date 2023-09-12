@@ -1,7 +1,7 @@
 plugins {
     kotlin("android")
-    kotlin("kapt")
     id("com.android.application")
+    id("com.google.devtools.ksp")
     id("dagger.hilt.android.plugin")
 }
 
@@ -38,12 +38,6 @@ android {
     testOptions {
         execution = "ANDROIDX_TEST_ORCHESTRATOR"
     }
-
-    kapt {
-        arguments {
-            arg("dagger.hilt.shareTestComponents", "true")
-        }
-    }
 }
 
 dependencies {
@@ -73,8 +67,8 @@ dependencies {
     debugImplementation(libs.androidx.fragment.testing)
     androidTestUtil(libs.androidx.test.orchestrator)
 
-    kapt(libs.hilt.android.compiler)
-    kaptAndroidTest(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
+    kspAndroidTest(libs.hilt.android.compiler)
 }
 
 hilt {
