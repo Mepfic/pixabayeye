@@ -1,5 +1,5 @@
 plugins {
-    androidLibraryBaseConvention
+    id("library.base")
     alias(libs.plugins.ksp)
 }
 

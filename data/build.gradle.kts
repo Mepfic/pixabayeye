@@ -1,7 +1,7 @@
 import java.util.Properties
 
 plugins {
-    androidLibraryBaseConvention
+    id("library.base")
     alias(libs.plugins.ksp)
 }
 
@@ -11,7 +11,7 @@ android {
     buildFeatures.buildConfig = true
 
     defaultConfig {
-        file("$rootDir/buildSrc/src/keys/apikeys.properties").let { file ->
+        file("$rootDir/build-logic/src/keys/apikeys.properties").let { file ->
             if (file.exists()) {
                 val appProperties = Properties()
                 appProperties.load(file.inputStream())

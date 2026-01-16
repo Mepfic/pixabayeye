@@ -1,5 +1,5 @@
 plugins {
-    androidLibraryUiConvention
+    id("library.ui")
     id("androidx.navigation.safeargs.kotlin")
     id("dagger.hilt.android.plugin")
     alias(libs.plugins.ksp)

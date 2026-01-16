@@ -14,7 +14,7 @@ androidx-test-core = "1.7.0"
 androidx-test-espresso = "3.7.0"
 androidx-test-orchestrator = "1.6.1"
 androidx-test-truth = "1.7.0"
-jwm = "17"
+jvm = "21"
 coil = "2.7.0"
 dagger = "2.57.2"
 detekt = "1.23.8"
@@ -24,6 +24,7 @@ ksp = "2.2.20-2.0.4"
 kotlin = "2.2.20"
 kotlinx-coroutines = "1.10.2"
 ktlint = "0.50.0"
+ktlint-gradle = "14.0.1"
 mockk = "1.14.7"
 moshi = "1.15.2"
 okhttp-logging-interceptor = "5.3.2"
@@ -65,7 +66,8 @@ kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", v
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
-ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
+#ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
+ktlint-gradlePlugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint-gradle" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
@@ -80,6 +82,22 @@ room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
+#//TODO
+[bundles]
+#ui-convention = [
+#    "android-material",
+#    "androidx-activity-ktx",
+#    "androidx-fragment-ktx",
+#    "androidx-lifecycle-process",
+#    "androidx-lifecycle-runtime-ktx"
+#]
+
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
+
+# Convention plugins
+convention-tasks = { id = "tasksPlugin", version = "unspecified" }
+library-base = { id = "library.base", version = "unspecified" }
+library-ui = { id = "library.ui", version = "unspecified" }

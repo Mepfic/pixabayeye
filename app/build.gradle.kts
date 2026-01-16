@@ -1,10 +1,18 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget.Companion.fromTarget
 
+val jvmVersion: String = libs.versions.jvm.get()
+
 plugins {
     kotlin("android")
     id("com.android.application")
     id("dagger.hilt.android.plugin")
     alias(libs.plugins.ksp)
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(jvmVersion))
+    }
 }
 
 android {
@@ -30,14 +38,14 @@ android {
     }
 
     compileOptions {
-        val javaVersion = JavaVersion.toVersion(libs.versions.jwm.get())
+        val javaVersion = JavaVersion.toVersion(libs.versions.jvm.get())
         sourceCompatibility = javaVersion
         targetCompatibility = javaVersion
     }
 
     kotlin {
         compilerOptions {
-            jvmTarget.set(fromTarget(libs.versions.jwm.get()))
+            jvmTarget.set(fromTarget(libs.versions.jvm.get()))
         }
     }
 
