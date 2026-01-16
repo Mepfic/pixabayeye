@@ -2,6 +2,7 @@ plugins {
     androidLibraryUiConvention
     id("androidx.navigation.safeargs.kotlin")
     id("dagger.hilt.android.plugin")
+    alias(libs.plugins.ksp)
 }
 
 android.namespace = "com.myapps.pixabayeye.search"
@@ -12,4 +13,5 @@ dependencies {
 
     testImplementation(project(":testCommon"))
     testImplementation(libs.androidx.paging.testing)
+    ksp(libs.hilt.android.compiler)
 }

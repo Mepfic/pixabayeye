@@ -5,10 +5,11 @@ repositories {
 
 plugins {
     `kotlin-dsl`
+    `java-gradle-plugin`
 }
 
 dependencies {
-    implementation(buildSrcLibs.android.gradle.plugin)
-    implementation(buildSrcLibs.javapoet)
-    implementation(buildSrcLibs.kotlin.gradle.plugin)
+    implementation(libs.android.gradle.plugin)
+    implementation(libs.kotlin.gradle.plugin)
+    implementation(libs.javapoet)
 }

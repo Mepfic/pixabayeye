@@ -19,5 +19,4 @@ dependencies {
     implementation(libs.findLibrary("hilt-android").get())
     implementation(libs.findLibrary("timber").get())
 
-    kapt(libs.findLibrary("hilt-android-compiler").get())
 }

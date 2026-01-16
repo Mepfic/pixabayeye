@@ -11,7 +11,7 @@ buildscript {
 
 plugins {
     alias(libs.plugins.detekt)
-    alias(libs.plugins.google.ksp) apply false
+    alias(libs.plugins.ksp) apply false
 }
 
 apply(from = "$rootDir/ci.gradle.kts")

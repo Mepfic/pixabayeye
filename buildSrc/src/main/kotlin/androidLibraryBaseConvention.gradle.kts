@@ -1,9 +1,10 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget.Companion.fromTarget
+
 val libs = project.extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("kapt")
 }
 
 android {
@@ -14,15 +15,16 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.valueOf(
-            libs.findVersion("build-javaVersion").get().requiredVersion
+        val javaVersion = JavaVersion.toVersion(
+            libs.findVersion("jwm").get().requiredVersion
         )
-        targetCompatibility = JavaVersion.valueOf(
-            libs.findVersion("build-javaVersion").get().requiredVersion
-        )
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
     }
-    kotlinOptions {
-        jvmTarget = libs.findVersion("build-jvmTarget").get().requiredVersion
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(fromTarget(libs.findVersion("jwm").get().requiredVersion))
+        }
     }
 }
 
@@ -43,6 +45,4 @@ dependencies {
 
     androidTestImplementation(libs.findLibrary("androidx-test-espresso-core").get())
     androidTestImplementation(libs.findLibrary("kotlin-test-junit").get())
-
-    kapt(libs.findLibrary("hilt-android-compiler").get())
 }

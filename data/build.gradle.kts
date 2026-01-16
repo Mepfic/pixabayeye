@@ -2,6 +2,7 @@ import java.util.Properties
 
 plugins {
     androidLibraryBaseConvention
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -24,7 +25,6 @@ android {
 dependencies {
     androidTestImplementation(project(":testCommon"))
 
-    implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.kotlin.reflect)
     implementation(libs.moshi.kotlin)
     implementation(libs.okhttp.logging.interceptor)
@@ -37,5 +37,6 @@ dependencies {
     androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.room.testing)
 
-    kapt(libs.room.compiler)
+    ksp(libs.room.compiler)
+    ksp(libs.hilt.android.compiler)
 }
