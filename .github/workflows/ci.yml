@@ -37,7 +37,6 @@ jobs:
   tests:
     name: Unit tests
     runs-on: ubuntu-latest
-    needs: checks
     if: github.event_name == 'push' || github.event_name == 'pull_request'
 
     steps:
@@ -62,7 +61,6 @@ jobs:
   build:
     name: Build artifacts
     runs-on: ubuntu-latest
-    needs: tests
     if: github.event_name == 'push' || github.event_name == 'pull_request'
 
     steps:
@@ -87,7 +85,6 @@ jobs:
   emulator:
     name: Emulator tests
     runs-on: macos-latest
-    needs: build
     if: github.event_name == 'push' || github.event_name == 'pull_request'
 
     steps:
