@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  Checks:
+  checks:
     name: Static checks
     runs-on: ubuntu-latest
 
@@ -35,10 +35,10 @@ jobs:
             lint \
             --stacktrace
 
-  Tests:
+  tests:
     name: Unit tests
     runs-on: ubuntu-latest
-    needs: Checks
+    needs: checks
 
     steps:
       - name: Checkout
@@ -62,10 +62,10 @@ jobs:
             testDebugUnitTest \
             --stacktrace
 
-  Build:
+  build:
     name: Build artifacts
     runs-on: ubuntu-latest
-    needs: Tests
+    needs: tests
 
     steps:
       - name: Checkout
@@ -90,10 +90,10 @@ jobs:
             assembleRelease \
             --stacktrace
 
-  Emulator:
+  emulator:
     name: Emulator tests
     runs-on: macos-latest
-    needs: Build
+    needs: build
 
     steps:
       - name: Checkout
