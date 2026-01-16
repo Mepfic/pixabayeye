@@ -3,13 +3,20 @@ name: CI
 on:
   push:
     branches:
-      - '**'
+      - '**'  # any branch
   pull_request:
+    branches:
+      - main
+      - develop
 
 jobs:
   checks:
     name: Static checks
     runs-on: ubuntu-latest
+    if: |
+      github.ref == 'refs/heads/main' ||
+      github.ref == 'refs/heads/develop' ||
+      (github.event_name == 'push' && github.event.pull_request != null)
 
     steps:
       - name: Checkout
@@ -28,17 +35,16 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Run static analysis
-        run: |
-          ./gradlew \
-            ktlintCheck \
-            detekt \
-            lint \
-            --stacktrace
+        run: ./gradlew ktlintCheck detekt lint --stacktrace
 
   tests:
     name: Unit tests
     runs-on: ubuntu-latest
     needs: checks
+    if: |
+      github.ref == 'refs/heads/main' ||
+      github.ref == 'refs/heads/develop' ||
+      (github.event_name == 'push' && github.event.pull_request != null)
 
     steps:
       - name: Checkout
@@ -57,15 +63,16 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Run unit tests
-        run: |
-          ./gradlew \
-            testDebugUnitTest \
-            --stacktrace
+        run: ./gradlew testDebugUnitTest --stacktrace
 
   build:
     name: Build artifacts
     runs-on: ubuntu-latest
     needs: tests
+    if: |
+      github.ref == 'refs/heads/main' ||
+      github.ref == 'refs/heads/develop' ||
+      (github.event_name == 'push' && github.event.pull_request != null)
 
     steps:
       - name: Checkout
@@ -84,16 +91,16 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
 
       - name: Assemble
-        run: |
-          ./gradlew \
-            assembleDebug \
-            assembleRelease \
-            --stacktrace
+        run: ./gradlew assembleDebug assembleRelease --stacktrace
 
   emulator:
     name: Emulator tests
     runs-on: macos-latest
     needs: build
+    if: |
+      github.ref == 'refs/heads/main' ||
+      github.ref == 'refs/heads/develop' ||
+      (github.event_name == 'push' && github.event.pull_request != null)
 
     steps:
       - name: Checkout
@@ -109,8 +116,7 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Assemble androidTest
-        run: |
-          ./gradlew assembleAndroidTest --stacktrace
+        run: ./gradlew assembleAndroidTest --stacktrace
 
       - name: Run instrumentation tests on emulator
         uses: ReactiveCircus/android-emulator-runner@v2
