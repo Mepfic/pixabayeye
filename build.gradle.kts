@@ -11,14 +11,14 @@ buildscript {
 
 plugins {
     alias(libs.plugins.detekt)
-    alias(libs.plugins.google.ksp) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.ktlint) apply false
+    alias(libs.plugins.convention.tasks) apply false
 }
-
-apply(from = "$rootDir/ci.gradle.kts")
 
 allprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
-    apply(from = "$rootDir/ktlint.gradle")
+    apply(plugin = "tasksPlugin")
 
     detekt {
         parallel = true

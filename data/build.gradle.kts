@@ -1,7 +1,8 @@
 import java.util.Properties
 
 plugins {
-    androidLibraryBaseConvention
+    id("library.base")
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -10,7 +11,7 @@ android {
     buildFeatures.buildConfig = true
 
     defaultConfig {
-        file("$rootDir/buildSrc/src/keys/apikeys.properties").let { file ->
+        file("$rootDir/build-logic/src/keys/apikeys.properties").let { file ->
             if (file.exists()) {
                 val appProperties = Properties()
                 appProperties.load(file.inputStream())
@@ -24,7 +25,6 @@ android {
 dependencies {
     androidTestImplementation(project(":testCommon"))
 
-    implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.kotlin.reflect)
     implementation(libs.moshi.kotlin)
     implementation(libs.okhttp.logging.interceptor)
@@ -37,5 +37,6 @@ dependencies {
     androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.room.testing)
 
-    kapt(libs.room.compiler)
+    ksp(libs.room.compiler)
+    ksp(libs.hilt.android.compiler)
 }

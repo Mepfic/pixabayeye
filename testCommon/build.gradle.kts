@@ -1,5 +1,5 @@
 plugins {
-    androidLibraryUiConvention
+    id("library.ui")
 }
 
 android.namespace = "com.myapps.pixabayeye.test.common"

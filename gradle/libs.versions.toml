@@ -1,37 +1,37 @@
 [versions]
-agp = "8.1.1"
-android-build-compileSdk = "34"
+agp = "8.13.2"
+android-build-compileSdk = "36"
 android-build-minSdk = "24"
-android-build-targetSdk = "34"
-android-material = "1.9.0"
-androidx-activity = "1.7.2"
-androidx-fragment = "1.6.1"
-androidx-lifecycle = "2.6.2"
-androidx-navigation = "2.7.2"
-androidx-paging = "3.2.1"
-androidx-swiperefreshlayout = "1.1.0"
-androidx-test-core = "1.5.0"
-androidx-test-espresso = "3.5.1"
-androidx-test-orchestrator = "1.4.2"
-androidx-test-truth = "1.5.0"
-build-javaVersion = "VERSION_17"
-build-jvmTarget = "17"
-coil = "2.4.0"
-dagger = "2.48"
-detekt = "1.23.1"
-google-ksp = "1.9.10-1.0.13"
-hamcrest = "2.2"
+android-build-targetSdk = "36"
+android-material = "1.13.0"
+androidx-activity = "1.12.2"
+androidx-fragment = "1.8.9"
+androidx-lifecycle = "2.10.0"
+androidx-navigation = "2.9.6"
+androidx-paging = "3.3.6"
+androidx-swiperefreshlayout = "1.2.0"
+androidx-test-core = "1.7.0"
+androidx-test-espresso = "3.7.0"
+androidx-test-orchestrator = "1.6.1"
+androidx-test-truth = "1.7.0"
+jvm = "21"
+coil = "2.7.0"
+dagger = "2.57.2"
+detekt = "1.23.8"
+hamcrest = "3.0"
 javapoet = "1.13.0"
-kotlin = "1.9.10"
-kotlinx-coroutines = "1.7.3"
+ksp = "2.2.20-2.0.4"
+kotlin = "2.2.20"
+kotlinx-coroutines = "1.10.2"
 ktlint = "0.50.0"
-mockk = "1.13.5"
-moshi = "1.14.0"
-okhttp-logging-interceptor = "4.10.0"
-retrofit = "2.9.0"
-room = "2.6.0-beta01"
+ktlint-gradle = "14.0.1"
+mockk = "1.14.7"
+moshi = "1.15.2"
+okhttp-logging-interceptor = "5.3.2"
+retrofit = "3.0.0"
+room = "2.8.4"
 timber = "5.0.1"
-turbine = "1.0.0"
+turbine = "1.2.1"
 
 [libraries]
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
@@ -41,7 +41,6 @@ androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref
 androidx-fragment-testing = { module = "androidx.fragment:fragment-testing", version.ref = "androidx-fragment" }
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
-androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version.ref = "androidx-lifecycle" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx-navigation" }
 androidx-navigation-safeArgsGradlePlugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "androidx-navigation" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidx-navigation" }
@@ -67,7 +66,8 @@ kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", v
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
-ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
+#ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
+ktlint-gradlePlugin = { module = "org.jlleitschuh.gradle:ktlint-gradle", version.ref = "ktlint-gradle" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
@@ -82,6 +82,22 @@ room-testing = { module = "androidx.room:room-testing", version.ref = "room" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
+#//TODO
+[bundles]
+#ui-convention = [
+#    "android-material",
+#    "androidx-activity-ktx",
+#    "androidx-fragment-ktx",
+#    "androidx-lifecycle-process",
+#    "androidx-lifecycle-runtime-ktx"
+#]
+
 [plugins]
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-google-ksp = { id = "com.google.devtools.ksp", version.ref = "google-ksp" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
+
+# Convention plugins
+convention-tasks = { id = "tasksPlugin", version = "unspecified" }
+library-base = { id = "library.base", version = "unspecified" }
+library-ui = { id = "library.ui", version = "unspecified" }
