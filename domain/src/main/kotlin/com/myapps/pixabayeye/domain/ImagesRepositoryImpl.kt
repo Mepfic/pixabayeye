@@ -32,12 +32,14 @@ class ImagesRepositoryImpl @Inject constructor(
         PagingConfig(
             pageSize = PAGE_CAPACITY,
             initialLoadSize = PAGE_CAPACITY,
-            enablePlaceholders = true,
+            prefetchDistance = PREFETCH_DISTANCE,
+            enablePlaceholders = false,
             maxSize = BUFFER_CAPACITY
         )
 
     companion object {
-        private const val PAGE_CAPACITY = 50
-        private const val BUFFER_CAPACITY = 150
+        private const val PAGE_CAPACITY = 20
+        private const val PREFETCH_DISTANCE = 8
+        private const val BUFFER_CAPACITY = 60
     }
 }

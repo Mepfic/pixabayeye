@@ -4,7 +4,7 @@ import com.myapps.pixabayeye.domain.model.HitModel
 import com.myapps.pixabayeye.domain.util.tagsToList
 
 internal val mapToDetailsState = { model: HitModel ->
-    DetailsState(
+    UiState.DetailsState(
         userName = model.userName,
         tags = model.tags.tagsToList(),
         likes = model.likes,
