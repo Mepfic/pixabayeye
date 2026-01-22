@@ -6,13 +6,16 @@ import com.myapps.pixabayeye.data.database.dao.ImagesDao
 import com.myapps.pixabayeye.data.database.dao.SearchDao
 import com.myapps.pixabayeye.data.database.model.HitEntity
 import com.myapps.pixabayeye.data.database.model.SearchEntity
+import com.myapps.pixabayeye.data.database.model.SearchQueryEntity
 
 @Database(
     entities = [
         HitEntity::class,
-        SearchEntity::class
+        SearchEntity::class,
+        SearchQueryEntity::class
     ],
-    version = AppDatabase.VERSION
+    version = AppDatabase.VERSION,
+    exportSchema = true
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -21,6 +24,6 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun searchDao(): SearchDao
 
     companion object {
-        const val VERSION = 1
+        const val VERSION = 2
     }
 }

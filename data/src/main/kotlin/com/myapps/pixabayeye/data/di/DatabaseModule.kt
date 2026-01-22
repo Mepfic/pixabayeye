@@ -2,6 +2,8 @@ package com.myapps.pixabayeye.data.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.myapps.pixabayeye.data.database.AppDatabase
 import com.myapps.pixabayeye.data.database.dao.ImagesDao
 import dagger.Module
@@ -23,11 +25,23 @@ object DatabaseModule {
             AppDatabase::class.java,
             DATABASE_NAME
         )
-            .fallbackToDestructiveMigration()
+            .addMigrations(MIGRATION_1_2)
             .build()
 
     @Provides
     fun provideImagesDao(database: AppDatabase): ImagesDao = database.imagesDao()
+
+    private val MIGRATION_1_2 = object : Migration(1, 2) {
+        override fun migrate(db: SupportSQLiteDatabase) {
+            db.execSQL("""
+                CREATE TABLE IF NOT EXISTS search_queries (
+                    queryText TEXT PRIMARY KEY NOT NULL,
+                    timestamp INTEGER NOT NULL,
+                    lastFetchedPage INTEGER NOT NULL DEFAULT 0
+                )
+            """)
+        }
+    }
 
     private const val DATABASE_NAME = "pixabayeye.db"
 }

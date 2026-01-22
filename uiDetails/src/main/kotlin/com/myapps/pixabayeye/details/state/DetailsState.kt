@@ -1,12 +1,19 @@
 package com.myapps.pixabayeye.details.state
 
-data class DetailsState(
-    val userName: String,
-    val tags: List<String>,
-    val likes: Int,
-    val downloads: Int,
-    val comments: Int,
-    val previewUrl: String,
-    val middleImageUrl: String,
-    val largeImageUrl: String,
-)
+sealed interface UiState {
+    val isLoading: Boolean
+    val errorMessage: String?
+
+    data class DetailsState(
+        val userName: String = "",
+        val tags: List<String> = listOf(),
+        val likes: Int = 0,
+        val downloads: Int = 0,
+        val comments: Int = 0,
+        val previewUrl: String? = null,
+        val middleImageUrl: String? = null,
+        val largeImageUrl: String? = null,
+        override val isLoading: Boolean = false,
+        override val errorMessage: String? = null,
+    ) : UiState
+}

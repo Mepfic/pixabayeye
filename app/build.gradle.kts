@@ -5,8 +5,10 @@ val jvmVersion: String = libs.versions.jvm.get()
 plugins {
     kotlin("android")
     id("com.android.application")
-    id("dagger.hilt.android.plugin")
+    alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 java {
@@ -26,6 +28,7 @@ android {
 
         testInstrumentationRunner = "com.myapps.pixabayeye.AppTestRunner"
     }
+    buildFeatures.compose = true
 
     buildTypes {
         getByName("release") {
@@ -57,17 +60,32 @@ android {
 dependencies {
     implementation(project(":uiDetails"))
     implementation(project(":uiSearch"))
+    implementation(project(":uiCommon"))
 
     androidTestImplementation(project(":domain"))
     androidTestImplementation(project(":testCommon"))
-    androidTestImplementation(project(":uiCommon"))
 
-    implementation(libs.android.material)
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.hilt.android)
+
+    implementation(platform(libs.compose.core))
+    implementation(libs.compose.foundation)
+    implementation(libs.compose.navigation)
+    implementation(libs.compose.navigation.runtime)
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.preview)
+    implementation(libs.compose.constraintLayout)
+    implementation(libs.compose.navigation.hilt)
+    implementation(libs.lifecycle.viewmodel.navigation)
+
+    implementation(libs.compose.material)
+
+    implementation(libs.kotlinx.serialization.core)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.coil)
 
     androidTestImplementation(libs.androidx.fragment.testing)
     androidTestImplementation(libs.androidx.paging.runtime.ktx)

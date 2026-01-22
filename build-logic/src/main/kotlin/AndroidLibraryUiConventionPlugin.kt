@@ -11,16 +11,18 @@ class AndroidLibraryUiConventionPlugin : Plugin<Project> {
         with(target) {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
-            pluginManager.apply("library.base")
+            with(pluginManager) {
+                apply("library.base")
+                apply("org.jetbrains.kotlin.plugin.compose")
+            }
 
             extensions.configure<LibraryExtension> {
                 buildFeatures {
-                    viewBinding = true
+                    buildFeatures.compose = true
                 }
             }
 
             dependencies {
-                implementation(libs, "android-material")
                 implementation(libs, "androidx-activity-ktx")
                 implementation(libs, "androidx-fragment-ktx")
                 implementation(libs, "androidx-lifecycle-process")
@@ -29,8 +31,24 @@ class AndroidLibraryUiConventionPlugin : Plugin<Project> {
                 implementation(libs, "androidx-navigation-ui-ktx")
                 implementation(libs, "androidx-swiperefreshlayout")
                 implementation(libs, "coil")
+                implementation(libs, "coil-compose")
                 implementation(libs, "hilt-android")
                 implementation(libs, "timber")
+
+                val compose = platform(libs.findLibrary("compose-core").get())
+                add("implementation", compose)
+
+                implementation(libs, "compose-foundation")
+                implementation(libs, "compose-navigation")
+                implementation(libs, "compose-navigation-runtime")
+                implementation(libs, "compose-runtime")
+                implementation(libs, "compose-preview")
+                implementation(libs, "compose-constraintLayout")
+                implementation(libs, "compose-navigation-hilt")
+                implementation(libs, "lifecycle-viewmodel-navigation")
+                implementation(libs, "compose-material")
+                implementation(libs, "paging-compose")
+
             }
         }
     }
