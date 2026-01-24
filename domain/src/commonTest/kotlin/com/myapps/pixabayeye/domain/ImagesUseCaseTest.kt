@@ -1,7 +1,7 @@
 package com.myapps.pixabayeye.domain
 
 import androidx.paging.PagingData
-import com.myapps.pixabayeye.test.common.stub.StubModels.hitModels
+import com.myapps.pixabayeye.domain.StubModels.hitModels
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

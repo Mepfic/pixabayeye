@@ -25,12 +25,16 @@ gradlePlugin {
             implementationClass = "TasksConventionPlugin"
         }
         register("androidLibraryBase") {
-            id = "library.base"
+            id = libs.plugins.android.library.base.get().pluginId
             implementationClass = "AndroidLibraryBaseConventionPlugin"
         }
         register("androidLibraryUi") {
-            id = "library.ui"
+            id = libs.plugins.android.library.ui.get().pluginId
             implementationClass = "AndroidLibraryUiConventionPlugin"
+        }
+        register("kmpLibraryBase") {
+            id = libs.plugins.kmp.library.base.get().pluginId
+            implementationClass = "KmpLibraryBaseConventionPlugin"
         }
     }
 }

@@ -64,6 +64,7 @@ dependencies {
     implementation(project(":data"))
 
     androidTestImplementation(project(":data"))
+    androidTestImplementation(project(":domain"))
     androidTestImplementation(project(":testCommon"))
 
     implementation(libs.androidx.activity.ktx)

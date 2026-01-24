@@ -1,6 +1,5 @@
 plugins {
-    id("library.ui")
-    id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.android.library.ui)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
 }
@@ -12,6 +11,6 @@ dependencies {
     implementation(project(":uiCommon"))
 
     testImplementation(project(":testCommon"))
-    testImplementation(libs.androidx.paging.testing)
+
     ksp(libs.hilt.android.compiler)
 }

@@ -1,6 +1,6 @@
 package com.myapps.pixabayeye.domain
 
-import com.myapps.pixabayeye.test.common.stub.StubModels.hitModel
+import com.myapps.pixabayeye.domain.StubModels.hitModel
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

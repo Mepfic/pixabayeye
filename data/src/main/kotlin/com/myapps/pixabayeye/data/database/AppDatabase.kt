@@ -15,7 +15,7 @@ import com.myapps.pixabayeye.data.database.model.SearchQueryEntity
         SearchQueryEntity::class
     ],
     version = AppDatabase.VERSION,
-    exportSchema = true
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 

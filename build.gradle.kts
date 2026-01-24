@@ -1,7 +1,6 @@
 buildscript {
     dependencies {
         classpath(libs.android.gradle.plugin)
-        classpath(libs.androidx.navigation.safeArgsGradlePlugin)
         classpath(libs.hilt.android.gradle.plugin)
         classpath(libs.javapoet)
         classpath(libs.kotlin.gradle.plugin)

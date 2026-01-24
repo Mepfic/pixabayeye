@@ -1,11 +1,11 @@
 package com.myapps.pixabayeye.details
 
 import app.cash.turbine.test
+import com.myapps.pixabayeye.details.model.StubModels
 import com.myapps.pixabayeye.details.state.mapToDetailsState
 import com.myapps.pixabayeye.details.ui.DetailsViewModel
 import com.myapps.pixabayeye.domain.DetailsUseCase
 import com.myapps.pixabayeye.test.common.MainCoroutineRule
-import com.myapps.pixabayeye.test.common.stub.StubModels
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -31,7 +31,7 @@ class DetailsViewModelTest {
         runTest {
             coEvery { detailsUseCase.invoke(testImageId) } returns StubModels.hitModel
             detailsViewModel.dataFlow.test {
-                detailsViewModel.getImages(testImageId)
+                detailsViewModel.load(testImageId)
                 assertEquals(
                     expected = StubModels.hitModel.let(mapToDetailsState),
                     actual = awaitItem()

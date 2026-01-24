@@ -12,7 +12,7 @@ class AndroidLibraryUiConventionPlugin : Plugin<Project> {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
             with(pluginManager) {
-                apply("library.base")
+                apply("android.library.base")
                 apply("org.jetbrains.kotlin.plugin.compose")
             }
 
@@ -49,6 +49,7 @@ class AndroidLibraryUiConventionPlugin : Plugin<Project> {
                 implementation(libs, "compose-material")
                 implementation(libs, "paging-compose")
 
+                testImplementation(libs, "androidx-paging-testing")
             }
         }
     }
