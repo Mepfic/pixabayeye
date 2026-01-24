@@ -61,8 +61,9 @@ dependencies {
     implementation(project(":uiDetails"))
     implementation(project(":uiSearch"))
     implementation(project(":uiCommon"))
+    implementation(project(":data"))
 
-    androidTestImplementation(project(":domain"))
+    androidTestImplementation(project(":data"))
     androidTestImplementation(project(":testCommon"))
 
     implementation(libs.androidx.activity.ktx)

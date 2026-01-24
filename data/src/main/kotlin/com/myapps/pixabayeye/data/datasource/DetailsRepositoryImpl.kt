@@ -1,12 +1,10 @@
-package com.myapps.pixabayeye.domain
+package com.myapps.pixabayeye.data.datasource
 
-import androidx.paging.ExperimentalPagingApi
 import com.myapps.pixabayeye.data.database.dao.ImagesDao
+import com.myapps.pixabayeye.domain.DetailsRepository
 import com.myapps.pixabayeye.domain.model.HitModel
-import com.myapps.pixabayeye.domain.model.mapEntityToHitModel
 import javax.inject.Inject
 
-@ExperimentalPagingApi
 class DetailsRepositoryImpl @Inject constructor(
     private val imagesDao: ImagesDao,
 ) : DetailsRepository {

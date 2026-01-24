@@ -6,6 +6,7 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.myapps.pixabayeye.data.database.AppDatabase
 import com.myapps.pixabayeye.data.database.dao.ImagesDao
+import com.myapps.pixabayeye.data.database.dao.SearchDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +28,9 @@ object DatabaseModule {
         )
             .addMigrations(MIGRATION_1_2)
             .build()
+
+    @Provides
+    fun provideSearchDao(database: AppDatabase): SearchDao = database.searchDao()
 
     @Provides
     fun provideImagesDao(database: AppDatabase): ImagesDao = database.imagesDao()

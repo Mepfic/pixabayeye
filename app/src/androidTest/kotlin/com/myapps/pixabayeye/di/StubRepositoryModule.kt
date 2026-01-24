@@ -2,7 +2,7 @@ package com.myapps.pixabayeye.di
 
 import androidx.paging.ExperimentalPagingApi
 import com.myapps.pixabayeye.domain.DetailsRepository
-import com.myapps.pixabayeye.domain.di.DetailsRepositoryModule
+import com.myapps.pixabayeye.data.di.DetailsRepositoryModule
 import com.myapps.pixabayeye.repository.StubDetailsRepository
 import dagger.Binds
 import dagger.Module

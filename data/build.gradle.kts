@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
     androidTestImplementation(project(":testCommon"))
 
     implementation(libs.kotlin.reflect)

@@ -21,6 +21,8 @@ class ImageRemoteMediatorTest {
 
     private val mockApi = SubNetworkApi()
     private val mockDb: AppDatabase = SubDatabaseFactory.create()
+    private val imagesDao = mockDb.imagesDao()
+    private val searchDao = mockDb.searchDao()
 
     @Test
     fun refreshLoadReturnsSuccessResult() {
@@ -28,6 +30,8 @@ class ImageRemoteMediatorTest {
             val mediator = ImagesRemoteMediator(
                 database = mockDb,
                 mainNetworkApi = mockApi,
+                imagesDao = imagesDao,
+                searchDao = searchDao,
                 query = QUERY_ONE
             )
             val pagingState = PagingState<Int, HitEntity>(

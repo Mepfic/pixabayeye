@@ -1,6 +1,7 @@
-package com.myapps.pixabayeye.domain.model
+package com.myapps.pixabayeye.data.datasource
 
 import com.myapps.pixabayeye.data.database.model.HitEntity
+import com.myapps.pixabayeye.domain.model.HitModel
 
 internal val mapEntityToHitModel = { entity: HitEntity ->
     HitModel(
