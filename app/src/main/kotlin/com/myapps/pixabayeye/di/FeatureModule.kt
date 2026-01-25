@@ -2,8 +2,8 @@ package com.myapps.pixabayeye.di
 
 import com.myapps.pixabayeye.details.ui.Details
 import com.myapps.pixabayeye.details.ui.DetailsRoute
-import com.myapps.pixabayeye.search.ui.Images
-import com.myapps.pixabayeye.search.ui.ImagesRoute
+import com.myapps.pixabayeye.search.ui.Search
+import com.myapps.pixabayeye.search.ui.SearchRoute
 import com.myapps.pixabayeye.ui.navigation.EntryProviderInstaller
 import com.myapps.pixabayeye.ui.navigation.Navigator
 import dagger.Module
@@ -20,8 +20,8 @@ object FeatureModule {
     @Provides
     fun provideEntryProviderInstaller(navigator: Navigator): EntryProviderInstaller =
         {
-            entry<Images> {
-                ImagesRoute(
+            entry<Search> {
+                SearchRoute(
                     navigateToDetails = { id -> navigator.navigateTo(Details(id)) }
                 )
             }

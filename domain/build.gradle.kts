@@ -1,12 +1,14 @@
 plugins {
-    id("library.base")
-    alias(libs.plugins.ksp)
+    alias(libs.plugins.kmp.library.base)
 }
 
-android.namespace = "com.myapps.pixabayeye.domain"
-
-dependencies {
-    implementation(project(":data"))
-    testImplementation(project(":testCommon"))
-    ksp(libs.hilt.android.compiler)
+kotlin {
+    sourceSets {
+        val commonMain by getting {
+            dependencies {
+                implementation(libs.paging.compose)
+            }
+        }
+    }
 }
+

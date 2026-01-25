@@ -25,11 +25,10 @@ import java.io.IOException
 class ImagesRemoteMediator @AssistedInject constructor(
     private val database: AppDatabase,
     private val mainNetworkApi: MainNetworkApi,
+    private val imagesDao: ImagesDao,
+    private val searchDao: SearchDao,
     @Assisted private val query: String,
 ) : RemoteMediator<Int, HitEntity>() {
-
-    private val imagesDao: ImagesDao = database.imagesDao()
-    private val searchDao: SearchDao = database.searchDao()
 
     private var pageIndex = 1
     private var isCacheValid = false

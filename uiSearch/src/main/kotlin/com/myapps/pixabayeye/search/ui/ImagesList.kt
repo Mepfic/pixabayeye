@@ -11,11 +11,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.itemKey
 import com.myapps.pixabayeye.search.state.SearchItemState
+import com.myapps.pixabayeye.test.common.TestTags
 
 @Composable
 fun ImagesList(
@@ -48,7 +50,7 @@ fun ImagesList(
                             .height(80.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        CircularProgressIndicator()
+                        CircularProgressIndicator(Modifier.testTag(TestTags.LOAD_MORE_INDICATOR))
                     }
                 }
             }
@@ -57,14 +59,15 @@ fun ImagesList(
         when (items.loadState.refresh) {
             is LoadState.Loading ->
                 Box(modifier = Modifier.align(Alignment.Center)) {
-                    CircularProgressIndicator()
+                    CircularProgressIndicator(Modifier.testTag(TestTags.SEARCH_LOADING))
                 }
 
             is LoadState.Error ->
                 Text(
                     modifier = Modifier
                         .padding(16.dp)
-                        .align(Alignment.Center),
+                        .align(Alignment.Center)
+                        .testTag(TestTags.ERROR_MESSAGE),
                     text = "Error loading more"
                 )
 

@@ -4,7 +4,7 @@ val jvmVersion: String = libs.versions.jvm.get()
 
 plugins {
     kotlin("android")
-    id("com.android.application")
+    alias(libs.plugins.android.application)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
@@ -29,6 +29,12 @@ android {
         testInstrumentationRunner = "com.myapps.pixabayeye.AppTestRunner"
     }
     buildFeatures.compose = true
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 
     buildTypes {
         getByName("release") {
@@ -61,14 +67,15 @@ dependencies {
     implementation(project(":uiDetails"))
     implementation(project(":uiSearch"))
     implementation(project(":uiCommon"))
+    implementation(project(":data"))
 
+    androidTestImplementation(project(":data"))
     androidTestImplementation(project(":domain"))
     androidTestImplementation(project(":testCommon"))
+    androidTestImplementation(project(":uiSearch"))
+    androidTestImplementation(project(":uiDetails"))
 
-    implementation(libs.androidx.activity.ktx)
-    implementation(libs.androidx.fragment.ktx)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.material)
     implementation(libs.hilt.android)
 
     implementation(platform(libs.compose.core))
@@ -83,20 +90,25 @@ dependencies {
 
     implementation(libs.compose.material)
 
-    implementation(libs.kotlinx.serialization.core)
-    implementation(libs.kotlinx.serialization.json)
     implementation(libs.coil)
 
-    androidTestImplementation(libs.androidx.fragment.testing)
     androidTestImplementation(libs.androidx.paging.runtime.ktx)
     androidTestImplementation(libs.androidx.test.core)
-    androidTestImplementation(libs.androidx.test.espresso.contrib)
-    androidTestImplementation(libs.androidx.test.espresso.core)
-    androidTestImplementation(libs.androidx.test.espresso.intents)
-    androidTestImplementation(libs.hamcrest)
     androidTestImplementation(libs.hilt.android.testing)
 
-    debugImplementation(libs.androidx.fragment.testing)
+    androidTestImplementation(platform(libs.compose.core))
+    androidTestImplementation(libs.bundles.testing.compose)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.turbine)
+    androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.paging.compose)
+    androidTestImplementation(libs.paging.compose.testing)
+    androidTestImplementation(libs.coil.test)
+    androidTestImplementation(libs.coil.compose)
+    androidTestImplementation(libs.coil)
+
+    debugImplementation(libs.compose.ui.test.manifest)
+
     androidTestUtil(libs.androidx.test.orchestrator)
 
     ksp(libs.hilt.android.compiler)

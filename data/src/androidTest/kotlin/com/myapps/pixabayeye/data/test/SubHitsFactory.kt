@@ -1,7 +1,7 @@
 package com.myapps.pixabayeye.data.test
 
 import com.myapps.pixabayeye.data.network.model.HitResponse
-import com.myapps.pixabayeye.test.common.stub.StubModels.responseHitModel
+import com.myapps.pixabayeye.test.common.StubModels.responseHitModel
 
 object SubHitsFactory {
     fun createHits(perPage: Int): List<HitResponse> =

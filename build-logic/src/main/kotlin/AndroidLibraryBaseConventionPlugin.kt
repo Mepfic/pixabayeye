@@ -57,7 +57,8 @@ class AndroidLibraryBaseConventionPlugin : Plugin<Project> {
                 testImplementation(libs, "mockk-android")
                 testImplementation(libs, "turbine")
 
-                androidTestImplementation(libs, "androidx-test-espresso-core")
+                androidTestImplementation(libs, "androidx-test-runner")
+                androidTestImplementation(libs, "androidx-test-core")
                 androidTestImplementation(libs, "kotlin-test-junit")
             }
         }

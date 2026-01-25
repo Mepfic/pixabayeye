@@ -7,11 +7,11 @@ import androidx.paging.testing.asSnapshot
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListUpdateCallback
 import com.myapps.pixabayeye.domain.ImagesUseCase
+import com.myapps.pixabayeye.search.StubModels.hitModels
 import com.myapps.pixabayeye.search.state.SearchItemState
 import com.myapps.pixabayeye.search.state.mapToSearchItemState
 import com.myapps.pixabayeye.search.ui.SearchViewModel
 import com.myapps.pixabayeye.test.common.MainCoroutineRule
-import com.myapps.pixabayeye.test.common.stub.StubModels.hitModels
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

@@ -12,7 +12,7 @@ class AndroidLibraryUiConventionPlugin : Plugin<Project> {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
             with(pluginManager) {
-                apply("library.base")
+                apply("android.library.base")
                 apply("org.jetbrains.kotlin.plugin.compose")
             }
 
@@ -23,13 +23,6 @@ class AndroidLibraryUiConventionPlugin : Plugin<Project> {
             }
 
             dependencies {
-                implementation(libs, "androidx-activity-ktx")
-                implementation(libs, "androidx-fragment-ktx")
-                implementation(libs, "androidx-lifecycle-process")
-                implementation(libs, "androidx-lifecycle-runtime-ktx")
-                implementation(libs, "androidx-navigation-fragment-ktx")
-                implementation(libs, "androidx-navigation-ui-ktx")
-                implementation(libs, "androidx-swiperefreshlayout")
                 implementation(libs, "coil")
                 implementation(libs, "coil-compose")
                 implementation(libs, "hilt-android")
@@ -49,6 +42,7 @@ class AndroidLibraryUiConventionPlugin : Plugin<Project> {
                 implementation(libs, "compose-material")
                 implementation(libs, "paging-compose")
 
+                testImplementation(libs, "paging-compose-testing")
             }
         }
     }

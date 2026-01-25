@@ -1,5 +1,7 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
-    id("library.ui")
+    alias(libs.plugins.android.library.ui)
 }
 
 android.namespace = "com.myapps.pixabayeye.common"

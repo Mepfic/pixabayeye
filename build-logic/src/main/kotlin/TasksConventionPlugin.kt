@@ -18,7 +18,6 @@ class TasksConventionPlugin : Plugin<Project> {
     private fun Project.registerKtLintTasks() {
         pluginManager.apply("org.jlleitschuh.gradle.ktlint")
 
-        // Настраиваем ktlint extension
         extensions.configure<KtlintExtension>("ktlint") {
             version.set("1.1.0")
             android.set(true)

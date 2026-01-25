@@ -2,14 +2,12 @@ val jvmVersion: String = libs.versions.jvm.get()
 
 plugins {
     `kotlin-dsl`
-    `java-gradle-plugin`
 }
 
 dependencies {
     compileOnly(libs.ktlint.gradlePlugin)
     implementation(libs.android.gradle.plugin)
     implementation(libs.kotlin.gradle.plugin)
-    implementation(libs.javapoet)
 }
 
 java {
@@ -25,12 +23,16 @@ gradlePlugin {
             implementationClass = "TasksConventionPlugin"
         }
         register("androidLibraryBase") {
-            id = "library.base"
+            id = libs.plugins.android.library.base.get().pluginId
             implementationClass = "AndroidLibraryBaseConventionPlugin"
         }
         register("androidLibraryUi") {
-            id = "library.ui"
+            id = libs.plugins.android.library.ui.get().pluginId
             implementationClass = "AndroidLibraryUiConventionPlugin"
+        }
+        register("kmpLibraryBase") {
+            id = libs.plugins.kmp.library.base.get().pluginId
+            implementationClass = "KmpLibraryBaseConventionPlugin"
         }
     }
 }
