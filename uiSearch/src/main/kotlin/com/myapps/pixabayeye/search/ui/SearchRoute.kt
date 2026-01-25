@@ -10,16 +10,16 @@ import kotlinx.serialization.Serializable
  * Destination for the Search Page
  */
 @Serializable
-object Images : NavKey
+object Search : NavKey
 
 @Composable
-fun ImagesRoute(
+fun SearchRoute(
     viewModel: SearchViewModel = hiltViewModel(),
     navigateToDetails: (Long) -> Unit,
 ) {
     val items = viewModel.dataFlow.collectAsLazyPagingItems()
 
-    ImagesPage(
+    SearchPage(
         items = items,
         onSearchClick = { viewModel.getImages(it) },
         navigateToDetails = navigateToDetails

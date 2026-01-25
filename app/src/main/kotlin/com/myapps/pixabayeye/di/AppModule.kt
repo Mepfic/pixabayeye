@@ -1,6 +1,6 @@
 package com.myapps.pixabayeye.di
 
-import com.myapps.pixabayeye.search.ui.Images
+import com.myapps.pixabayeye.search.ui.Search
 import com.myapps.pixabayeye.ui.navigation.Navigator
 import dagger.Module
 import dagger.Provides
@@ -14,6 +14,6 @@ object AppModule {
 
     @Provides
     @ActivityRetainedScoped
-    fun provideNavigator(): Navigator = Navigator(Images)
+    fun provideNavigator(): Navigator = Navigator(Search)
 }
 

@@ -21,22 +21,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.myapps.pixabayeye.common.R
 import com.myapps.pixabayeye.search.state.SearchItemState
+import com.myapps.pixabayeye.test.common.TestTags
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ImagesPage(
+fun SearchPage(
     modifier: Modifier = Modifier,
     items: LazyPagingItems<SearchItemState>,
     onSearchClick: (String) -> Unit,
     navigateToDetails: (Long) -> Unit,
 ) {
-    Column(modifier = modifier.fillMaxSize()) {
+    Column(modifier = modifier
+        .fillMaxSize()
+        .testTag(TestTags.SEARCH_SCREEN)
+    ) {
 
         val refreshing = items.loadState.refresh is LoadState.Loading
         val state = rememberPullToRefreshState()
@@ -71,6 +76,7 @@ fun ImagesPage(
             expanded = false,
             onExpandedChange = {},
             windowInsets = WindowInsets(),
+            modifier = Modifier.testTag(TestTags.SEARCH_INPUT)
         ) {}
 
         PullToRefreshBox(

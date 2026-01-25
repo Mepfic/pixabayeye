@@ -9,6 +9,7 @@ android.namespace = "com.myapps.pixabayeye.details"
 dependencies {
     implementation(project(":domain"))
     implementation(project(":uiCommon"))
+    implementation(project(":testCommon"))
 
     testImplementation(project(":testCommon"))
 

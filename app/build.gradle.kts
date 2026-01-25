@@ -4,7 +4,7 @@ val jvmVersion: String = libs.versions.jvm.get()
 
 plugins {
     kotlin("android")
-    id("com.android.application")
+    alias(libs.plugins.android.application)
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
@@ -29,6 +29,12 @@ android {
         testInstrumentationRunner = "com.myapps.pixabayeye.AppTestRunner"
     }
     buildFeatures.compose = true
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 
     buildTypes {
         getByName("release") {
@@ -66,6 +72,8 @@ dependencies {
     androidTestImplementation(project(":data"))
     androidTestImplementation(project(":domain"))
     androidTestImplementation(project(":testCommon"))
+    androidTestImplementation(project(":uiSearch"))
+    androidTestImplementation(project(":uiDetails"))
 
     implementation(libs.androidx.material)
     implementation(libs.hilt.android)
@@ -86,8 +94,15 @@ dependencies {
 
     androidTestImplementation(libs.androidx.paging.runtime.ktx)
     androidTestImplementation(libs.androidx.test.core)
-    androidTestImplementation(libs.hamcrest)
     androidTestImplementation(libs.hilt.android.testing)
+
+    androidTestImplementation(platform(libs.compose.core))
+    androidTestImplementation(libs.bundles.testing.compose)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.turbine)
+    androidTestImplementation(libs.androidx.test.runner)
+
+    debugImplementation(libs.compose.ui.test.manifest)
 
     androidTestUtil(libs.androidx.test.orchestrator)
 

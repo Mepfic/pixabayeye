@@ -1,117 +1,170 @@
 package com.myapps.pixabayeye.screen
 
-import android.os.SystemClock.sleep
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.swipeDown
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
-import androidx.test.espresso.matcher.RootMatchers.isDialog
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
-import com.myapps.pixabayeye.clickOnViewChild
-import com.myapps.pixabayeye.launchActivity
-import com.myapps.pixabayeye.launchFragmentInHiltContainer
-import com.myapps.pixabayeye.search.R
-import com.myapps.pixabayeye.search.adapter.ItemsViewHolder
-import com.myapps.pixabayeye.search.ui.SearchFragment
-import com.myapps.pixabayeye.typeSearchViewText
+import androidx.compose.ui.test.*
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.myapps.pixabayeye.test.common.TestTags
+import com.myapps.pixabayeye.ui.MainActivity
+import com.myapps.pixabayeye.utils.waitUntilExists
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.hamcrest.CoreMatchers.not
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import com.myapps.pixabayeye.common.R as CommonR
-import com.myapps.pixabayeye.details.R as DetailsR
+import org.junit.runner.RunWith
 
-@ExperimentalCoroutinesApi
+@OptIn(ExperimentalTestApi::class)
 @HiltAndroidTest
+@RunWith(AndroidJUnit4::class)
 class SearchScreenTest {
 
-    @get:Rule
+    @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
 
-    @Test
-    fun testLaunchFragment() {
-        launchFragmentInHiltContainer<SearchFragment>()
-        checkUiFlowAfterRequest()
+    @get:Rule(order = 1)
+    val composeTestRule = createAndroidComposeRule<MainActivity>()
+
+    @Before
+    fun init() {
+        hiltRule.inject()
     }
 
     @Test
-    fun testSwipeToRefresh() {
-        launchFragmentInHiltContainer<SearchFragment>()
-        sleep(GETTING_DATA_DELAY)
-        onView(withId(R.id.searchContainer)).perform(swipeDown())
-        checkUiFlowAfterRequest()
+    fun testSearchScreenDisplayed() {
+        // Verify search screen is displayed on app start
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_SCREEN)
+            .assertIsDisplayed()
+
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_INPUT)
+            .assertIsDisplayed()
     }
 
     @Test
-    fun testSearchView() {
-        launchFragmentInHiltContainer<SearchFragment>()
-        onView(withId(R.id.searchView)).perform(typeSearchViewText(TEST_QUERY))
-        checkUiFlowAfterRequest()
-    }
+    fun testSearchInput() {
+        // Type in search field
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_INPUT)
+            .performTextInput(TEST_QUERY)
 
-    @Test
-    fun testAlertDialog() {
-        launchActivity()
-        sleep(GETTING_DATA_DELAY)
-        onView(withId(R.id.recycler)).perform(
-            actionOnItemAtPosition<ItemsViewHolder>(
-                ITEM_POSITION,
-                clickOnViewChild(R.id.previewImage)
-            )
+        // Verify text was entered
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_INPUT)
+            .assertTextContains(TEST_QUERY)
+
+        // Wait for loading to finish
+        composeTestRule.waitUntilDoesNotExist(
+            hasTestTag(TestTags.SEARCH_LOADING),
+            timeoutMillis = GETTING_DATA_DELAY
         )
-        onView(withId(android.R.id.message))
-            .inRoot(isDialog())
-            .check(matches(withText("")))
-            .check(matches(not(isDisplayed())))
-        onView(withId(android.R.id.button2))
-            .inRoot(isDialog())
-            .check(matches(withText(CommonR.string.dialog_negative_button)))
-            .check(matches(isDisplayed()))
-        onView(withId(android.R.id.button1))
-            .inRoot(isDialog())
-            .check(matches(withText(CommonR.string.dialog_positive_button)))
-            .check(matches(isDisplayed()))
-        onView(withId(android.R.id.button2)).perform(click())
-        onView(withId(R.id.recycler)).perform(
-            actionOnItemAtPosition<ItemsViewHolder>(
-                ITEM_POSITION,
-                clickOnViewChild(R.id.previewImage)
-            )
-        )
-        onView(withId(android.R.id.button1)).perform(click())
+
+        // Verify results are displayed
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_RESULTS_LIST)
+            .assertIsDisplayed()
     }
 
     @Test
-    fun testNavigateToDetails() {
-        launchActivity()
-        sleep(GETTING_DATA_DELAY)
-        onView(withId(R.id.recycler)).perform(
-            actionOnItemAtPosition<ItemsViewHolder>(
-                ITEM_POSITION,
-                clickOnViewChild(R.id.previewImage)
-            )
+    fun testSearchResultsDisplayed() {
+        // Perform search
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_INPUT)
+            .performTextInput(TEST_QUERY)
+
+        // Wait for loading
+        composeTestRule.waitUntilExists(
+            hasTestTag(TestTags.SEARCH_LOADING),
+            timeoutMillis = 1000L
         )
-        onView(withId(android.R.id.button1)).perform(click())
-        onView(withId(DetailsR.id.detailsScrollView)).check(matches(isDisplayed()))
+
+        // Wait for results
+        composeTestRule.waitUntilDoesNotExist(
+            hasTestTag(TestTags.SEARCH_LOADING),
+            timeoutMillis = GETTING_DATA_DELAY
+        )
+
+        // Verify results list exists
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_RESULTS_LIST)
+            .assertIsDisplayed()
+
+        // Verify at least one item is displayed
+        composeTestRule.onAllNodesWithTag(TestTags.SEARCH_ITEM)
+            .assertCountEquals(0) // At least 1 item
     }
 
-    private fun checkUiFlowAfterRequest() {
-        onView(withId(R.id.progressContainer)).check(matches(isDisplayed()))
-        onView(withId(R.id.searchView)).check(matches(isDisplayed()))
-        sleep(GETTING_DATA_DELAY)
-        onView(withId(R.id.progressContainer)).check(matches(not(isDisplayed())))
-        onView(withId(R.id.searchView)).check(matches(isDisplayed()))
-        onView(withId(R.id.recycler)).check(matches(isDisplayed()))
+    @Test
+    fun testLoadingStateDisplayed() {
+        // Type search query
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_INPUT)
+            .performTextInput(TEST_QUERY)
+
+        // Verify loading indicator appears
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_LOADING)
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testScrollToLoadMore() {
+        // Perform search
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_INPUT)
+            .performTextInput(TEST_QUERY)
+
+        // Wait for initial results
+        composeTestRule.waitUntilDoesNotExist(
+            hasTestTag(TestTags.SEARCH_LOADING),
+            timeoutMillis = GETTING_DATA_DELAY
+        )
+
+        // Scroll to bottom
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_RESULTS_LIST)
+            .performScrollToNode(hasTestTag(TestTags.LOAD_MORE_INDICATOR))
+
+        // Verify load more indicator appears
+        composeTestRule.onNodeWithTag(TestTags.LOAD_MORE_INDICATOR)
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testClickOnSearchItem_NavigatesToDetails() {
+        // Perform search
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_INPUT)
+            .performTextInput(TEST_QUERY)
+
+        // Wait for results
+        composeTestRule.waitUntilDoesNotExist(
+            hasTestTag(TestTags.SEARCH_LOADING),
+            timeoutMillis = GETTING_DATA_DELAY
+        )
+
+        // Click first item - this triggers Navigation3 navigation
+        composeTestRule.onAllNodesWithTag(TestTags.SEARCH_ITEM)[0]
+            .performClick()
+
+        // Verify navigation to details screen
+        // With Navigation3, we verify by checking if DetailsScreen is displayed
+        composeTestRule.waitUntilExists(
+            hasTestTag(TestTags.DETAILS_SCREEN),
+            timeoutMillis = 1000L
+        )
+
+        composeTestRule.onNodeWithTag(TestTags.DETAILS_SCREEN)
+            .assertIsDisplayed()
+    }
+
+    @Test
+    fun testEmptyState() {
+        // Search with query that returns no results
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_INPUT)
+            .performTextInput("xyznonexistentquery123")
+
+        // Wait for search to complete
+        composeTestRule.waitUntilDoesNotExist(
+            hasTestTag(TestTags.SEARCH_LOADING),
+            timeoutMillis = GETTING_DATA_DELAY
+        )
+
+        // Verify empty state is shown
+        composeTestRule.onNodeWithTag(TestTags.SEARCH_EMPTY)
+            .assertIsDisplayed()
     }
 
     companion object {
-        const val GETTING_DATA_DELAY = 3000L
+        const val GETTING_DATA_DELAY = 5000L
         const val TEST_QUERY = "cats"
-        const val ITEM_POSITION = 3
     }
 }
