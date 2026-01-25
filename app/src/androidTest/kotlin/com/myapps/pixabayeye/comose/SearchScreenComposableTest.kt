@@ -29,7 +29,7 @@ import org.junit.Test
  * These tests demonstrate the structure, but integration tests
  * with real data flow are more reliable for pagination testing.
  */
-class SearchScreenUnitTest {
+class SearchScreenComposableTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
