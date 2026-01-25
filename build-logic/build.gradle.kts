@@ -2,14 +2,12 @@ val jvmVersion: String = libs.versions.jvm.get()
 
 plugins {
     `kotlin-dsl`
-    `java-gradle-plugin`
 }
 
 dependencies {
     compileOnly(libs.ktlint.gradlePlugin)
     implementation(libs.android.gradle.plugin)
     implementation(libs.kotlin.gradle.plugin)
-    implementation(libs.javapoet)
 }
 
 java {

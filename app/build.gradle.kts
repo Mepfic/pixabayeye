@@ -67,10 +67,7 @@ dependencies {
     androidTestImplementation(project(":domain"))
     androidTestImplementation(project(":testCommon"))
 
-    implementation(libs.androidx.activity.ktx)
-    implementation(libs.androidx.fragment.ktx)
-    implementation(libs.androidx.navigation.fragment.ktx)
-    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.material)
     implementation(libs.hilt.android)
 
     implementation(platform(libs.compose.core))
@@ -85,20 +82,13 @@ dependencies {
 
     implementation(libs.compose.material)
 
-    implementation(libs.kotlinx.serialization.core)
-    implementation(libs.kotlinx.serialization.json)
     implementation(libs.coil)
 
-    androidTestImplementation(libs.androidx.fragment.testing)
     androidTestImplementation(libs.androidx.paging.runtime.ktx)
     androidTestImplementation(libs.androidx.test.core)
-    androidTestImplementation(libs.androidx.test.espresso.contrib)
-    androidTestImplementation(libs.androidx.test.espresso.core)
-    androidTestImplementation(libs.androidx.test.espresso.intents)
     androidTestImplementation(libs.hamcrest)
     androidTestImplementation(libs.hilt.android.testing)
 
-    debugImplementation(libs.androidx.fragment.testing)
     androidTestUtil(libs.androidx.test.orchestrator)
 
     ksp(libs.hilt.android.compiler)
