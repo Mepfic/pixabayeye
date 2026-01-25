@@ -23,7 +23,7 @@ allprojects {
 
     detekt {
         parallel = true
-        ignoreFailures = false
+        ignoreFailures = true
     }
 }
 

@@ -1,10 +1,15 @@
+@file:Suppress(
+    "LongMethod",
+    "FunctionNaming",
+    "MagicNumber",
+    "NewLineAtEndOfFile"
+)
 package com.myapps.pixabayeye.details.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize

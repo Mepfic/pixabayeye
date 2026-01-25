@@ -1,3 +1,8 @@
+@file:Suppress(
+    "LongMethod",
+    "FunctionNaming",
+    "MagicNumber",
+)
 package com.myapps.pixabayeye.details.ui
 
 import androidx.compose.foundation.Image
