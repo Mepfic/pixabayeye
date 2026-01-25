@@ -5,6 +5,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import dagger.hilt.android.scopes.ActivityRetainedScoped
+import javax.inject.Inject
 
 typealias EntryProviderInstaller = EntryProviderScope<NavKey>.() -> Unit
 
@@ -12,7 +13,9 @@ typealias EntryProviderInstaller = EntryProviderScope<NavKey>.() -> Unit
  * Hilt-provided navigation manager
  */
 @ActivityRetainedScoped
-class Navigator(startDestination: NavKey) {
+class Navigator @Inject constructor(
+    startDestination: NavKey,
+) {
     val backStack: SnapshotStateList<NavKey> = mutableStateListOf(startDestination)
 
     fun navigateTo(destination: NavKey) {

@@ -39,7 +39,7 @@ fun SearchItem(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp, vertical = 4.dp)
-            .testTag("${TestTags.SEARCH_ITEM}_${item.imageId}"),
+            .testTag(TestTags.SEARCH_ITEM),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 2.dp),
         shape = RoundedCornerShape(12.dp),
         onClick = onClick

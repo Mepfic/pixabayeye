@@ -11,6 +11,7 @@ object TestTags {
     const val SEARCH_RESULTS_LIST = "search_results_list"
     const val SEARCH_ITEM = "search_item"
     const val SEARCH_LOADING = "search_loading"
+    const val SEARCH_PULL_TO_REFRESH = "search_pull_to_refresh"
     const val SEARCH_ERROR = "search_error"
     const val SEARCH_EMPTY = "search_empty"
     const val LOAD_MORE_INDICATOR = "load_more_indicator"

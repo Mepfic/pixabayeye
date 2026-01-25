@@ -1,7 +1,7 @@
 package com.myapps.pixabayeye.di
 
+import androidx.navigation3.runtime.NavKey
 import com.myapps.pixabayeye.search.ui.Search
-import com.myapps.pixabayeye.ui.navigation.Navigator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,6 +14,7 @@ object AppModule {
 
     @Provides
     @ActivityRetainedScoped
-    fun provideNavigator(): Navigator = Navigator(Search)
+    fun provideStartRoute(): NavKey = Search
+
 }
 

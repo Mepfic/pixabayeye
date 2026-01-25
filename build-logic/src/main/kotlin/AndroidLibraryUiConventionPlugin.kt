@@ -42,7 +42,7 @@ class AndroidLibraryUiConventionPlugin : Plugin<Project> {
                 implementation(libs, "compose-material")
                 implementation(libs, "paging-compose")
 
-                testImplementation(libs, "androidx-paging-testing")
+                testImplementation(libs, "paging-compose-testing")
             }
         }
     }

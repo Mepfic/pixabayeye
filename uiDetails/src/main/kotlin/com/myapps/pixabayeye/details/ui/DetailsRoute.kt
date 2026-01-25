@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.NavKey
+import com.myapps.pixabayeye.common.utils.isLandscape
 import kotlinx.serialization.Serializable
 
 /**
@@ -25,5 +26,7 @@ fun DetailsRoute(
         viewModel.load(imageId)
     }
 
-    DetailsScreen(uiState)
+    if (isLandscape()) DetailsScreenLandscape(uiState)
+    else DetailsScreen(uiState)
+
 }

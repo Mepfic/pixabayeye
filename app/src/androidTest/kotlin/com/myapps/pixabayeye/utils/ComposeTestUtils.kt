@@ -1,58 +1,28 @@
+@file:OptIn(ExperimentalCoilApi::class)
+
 package com.myapps.pixabayeye.utils
 
-import androidx.compose.runtime.Composable
+import android.graphics.drawable.ColorDrawable
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
-import androidx.navigation.compose.ComposeNavigator
-import androidx.navigation.testing.TestNavHostController
 import androidx.test.core.app.ApplicationProvider
-import com.myapps.pixabayeye.common.theme.PixabayTheme
-import com.myapps.pixabayeye.details.ui.Details
-import com.myapps.pixabayeye.search.ui.Search
+import coil.Coil
+import coil.ImageLoader
+import coil.annotation.ExperimentalCoilApi
+import coil.test.FakeImageLoaderEngine
 
-/**
- * Creates a test NavHostController for Navigation3 testing
- */
-fun createTestNavController(): TestNavHostController {
-    return TestNavHostController(ApplicationProvider.getApplicationContext()).apply {
-        navigatorProvider.addNavigator(ComposeNavigator())
-    }
-}
 
-/**
- * Navigate to search screen in tests
- */
-fun TestNavHostController.navigateToSearch() {
-    navigate(Search)
-}
+fun initFakeImageLoader() {
+    val fakeEngine = FakeImageLoaderEngine.Builder()
+        .default(ColorDrawable(android.graphics.Color.RED))
+        .build()
 
-/**
- * Navigate to details screen in tests
- */
-fun TestNavHostController.navigateToDetails(imageId: Long) {
-    navigate(Details(imageId))
-}
+    val fakeLoader = ImageLoader.Builder(ApplicationProvider.getApplicationContext())
+        .components { add(fakeEngine) }
+        .build()
 
-/**
- * Sets content with theme wrapper for consistent testing
- */
-fun ComposeContentTestRule.setContentWithTheme(
-    content: @Composable () -> Unit
-) {
-    setContent {
-        PixabayTheme {
-            content()
-        }
-    }
-}
-
-/**
- * Assert current navigation route
- */
-fun TestNavHostController.assertCurrentRoute(route: Any) {
-    assert(currentBackStackEntry?.destination?.route == route::class.qualifiedName) {
-        "Expected route ${route::class.simpleName}, but was ${currentBackStackEntry?.destination?.route}"
-    }
+    // Install fake loader
+    Coil.setImageLoader(fakeLoader)
 }
 
 /**
@@ -60,21 +30,9 @@ fun TestNavHostController.assertCurrentRoute(route: Any) {
  */
 fun ComposeContentTestRule.waitUntilExists(
     matcher: SemanticsMatcher,
-    timeoutMillis: Long = 3000L
+    timeoutMillis: Long = 3000L,
 ) {
     waitUntil(timeoutMillis) {
         onAllNodes(matcher).fetchSemanticsNodes().isNotEmpty()
-    }
-}
-
-/**
- * Wait for condition to be false
- */
-fun ComposeContentTestRule.waitUntilDoesNotExist(
-    matcher: SemanticsMatcher,
-    timeoutMillis: Long = 3000L
-) {
-    waitUntil(timeoutMillis) {
-        onAllNodes(matcher).fetchSemanticsNodes().isEmpty()
     }
 }

@@ -2,7 +2,9 @@ package com.myapps.pixabayeye.details.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
@@ -52,12 +54,12 @@ fun DetailsScreen(state: UiState.DetailsState) {
             Image(
                 painter = painter,
                 contentDescription = null,
-                contentScale = ContentScale.FillWidth,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .padding(start = 4.dp, end = 4.dp)
+                    .padding(horizontal = 4.dp)
                     .clip(shape = MaterialTheme.shapes.large)
                     .fillMaxWidth()
-                    .wrapContentHeight(align = Alignment.Top)
+                    .aspectRatio(1f)
                     .constrainAs(image) {
                         top.linkTo(parent.top, margin = 4.dp)
                     }

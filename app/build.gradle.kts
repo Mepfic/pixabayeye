@@ -101,6 +101,11 @@ dependencies {
     androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.turbine)
     androidTestImplementation(libs.androidx.test.runner)
+    androidTestImplementation(libs.paging.compose)
+    androidTestImplementation(libs.paging.compose.testing)
+    androidTestImplementation(libs.coil.test)
+    androidTestImplementation(libs.coil.compose)
+    androidTestImplementation(libs.coil)
 
     debugImplementation(libs.compose.ui.test.manifest)
 
