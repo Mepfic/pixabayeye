@@ -84,7 +84,7 @@ jobs:
 
   emulator:
     name: Emulator tests
-    runs-on: macos-13
+    runs-on: macos-latest
     if: github.event_name == 'push' || github.event_name == 'pull_request'
 
     steps:
