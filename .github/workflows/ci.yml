@@ -84,7 +84,7 @@ jobs:
 
   emulator:
     name: Emulator tests
-    runs-on: macos-latest
+    runs-on: macos-13
     if: github.event_name == 'push' || github.event_name == 'pull_request'
 
     steps:
@@ -100,17 +100,27 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
+
       - name: Assemble androidTest
         run: ./gradlew assembleAndroidTest --stacktrace
+
+      - name: Enable KVM (if available)
+        run: |
+          echo "Checking hardware acceleration..."
+          sysctl -a | grep -i virtualization || true
 
       - name: Run instrumentation tests on emulator
         uses: ReactiveCircus/android-emulator-runner@v2
         with:
-          api-level: 30
-          target: google_apis
+          api-level: 29
+          target: default
           arch: x86_64
           profile: Nexus 6
-          channel: stable
+          force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
+          disable-spellchecker: true
           script: ./gradlew connectedAndroidTest --stacktrace
+        timeout-minutes: 30
