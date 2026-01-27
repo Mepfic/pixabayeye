@@ -84,7 +84,7 @@ jobs:
 
   emulator:
     name: Emulator tests
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     if: github.event_name == 'push' || github.event_name == 'pull_request'
 
     steps:
@@ -103,23 +103,23 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
       - name: Assemble androidTest
         run: ./gradlew assembleAndroidTest --stacktrace
-
-      - name: Enable KVM (if available)
-        run: |
-          echo "Checking hardware acceleration..."
-          sysctl -a | grep -i virtualization || true
 
       - name: Run instrumentation tests on emulator
         uses: ReactiveCircus/android-emulator-runner@v2
         with:
-          api-level: 30
-          target: aosp_atd
-          arch: arm64-v8a
-          profile: pixel_6
+          api-level: 29
+          target: default
+          arch: x86_64
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -qemu -machine virt,accel=tcg
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           disable-spellchecker: true
           script: ./gradlew connectedAndroidTest --stacktrace
