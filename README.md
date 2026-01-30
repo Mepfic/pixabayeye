@@ -1,69 +1,95 @@
-# PixabayEye Application
+# PixabayEye
 
-Application allow to find images from service "https://pixabay.com/" by public API.
-____
+An Android application for searching and browsing images from Pixabay using their public API.
 
-## Tech stack
+---
 
-:large_blue_circle: Libs:
-- Kotlin    
-- Coroutines / Flow    
-- [Hilt](https://dagger.dev/hilt/)    
-- [Coil](https://coil-kt.github.io/coil/)    
-- [Retrofit 2](https://square.github.io/retrofit/), [Moshi](https://github.com/square/moshi)    
-- Room, Paging    
-- ViewBinding, Navigation    
+## Tech Stack
 
-:large_blue_circle: Testing:
-- JUnit    
-- [Mockk](https://mockk.io/)    
-- [Turbine](https://github.com/cashapp/turbine)    
-- Espresso    
-- Hilt testing    
+### Core
+- Kotlin
+- Coroutines & Flow
+- Jetpack Compose
+- Material3
+- Navigation3
 
-:large_blue_circle: Plugins:
-- [ktlint](https://github.com/pinterest/ktlint)    
-- [detekt](https://detekt.dev/)    
+### Libraries
+- **Dependency Injection:** [Hilt](https://dagger.dev/hilt/)
+- **Networking:** [Retrofit 2](https://square.github.io/retrofit/), [Moshi](https://github.com/square/moshi)
+- **Database:** Room
+- **Pagination:** Paging 3
+- **Image Loading:** [Coil](https://coil-kt.github.io/coil/)
 
-## Architecture approaches
+### Code Quality
+- [ktlint](https://github.com/pinterest/ktlint)
+- [detekt](https://detekt.dev/)
 
-:large_blue_circle: MVVM    
-:large_blue_circle: Modules    
-    - ```:app```        
-    - ```:uiSearch```    
-    - ```:uiDetails```    
-    - ```:uiCommon```    
-    - ```:domain```    
-    - ```:data```    
-    - ```:testCommon```    
+### Testing
+- JUnit
+- [Mockk](https://mockk.io/)
+- [Turbine](https://github.com/cashapp/turbine)
+- Espresso
+- Compose UI Testing
+- Hilt Testing
 
-:point_right: buildSrc folder to place general conventions that can be used in any modules    
-:point_right: all project dependencies described in Dependencies.kt file (placed in buildSrc folder)    
-:point_right: androidLibraryBaseConvention.gradle.kts file contains dependencies for any modules    
-:point_right: androidLibraryUiConvention.gradle.kts file contains dependencies for any UI modules, extend androidLibraryBaseConvention    
+---
 
-:point_right: caching based on the Room DB, with Paging 3, used RemoteMediator    
+## Architecture
 
-## Code quality    
-:point_right: Ktlint plugin to format & check style     
-:point_right: Detekt plugin to check style    
-:point_right: Unit tests    
-:point_right: Instrumental tests    
+The project follows **Clean Architecture** principles with **MVVM** pattern and modular structure.
 
-## Gradle tasks for local checks and on CI/CD system    
+### Modules
 
-:arrow_forward: Run code format and check code style:    
-```
+- **`:app`** — Application entry point and dependency injection setup
+- **`:domain`** — Business logic layer (pure Kotlin, platform-independent, multiplatform-ready)
+- **`:data`** — Data sources, repositories, and caching implementation
+- **`:uiSearch`** — Image search feature UI
+- **`:uiDetails`** — Image details screen UI
+- **`:uiCommon`** — Shared UI components and utilities
+- **`:testCommon`** — Shared testing utilities
+
+### Key Features
+
+- Clean Architecture with separation of concerns
+- Domain layer is pure Kotlin and multiplatform-ready
+- Offline-first approach with Room database caching
+- Pagination support using Paging 3 with RemoteMediator
+- SSL pinning for enhanced security
+
+---
+
+## Build Configuration
+
+Build logic and conventions are centralized in **`build-logic`**:
+
+- All project dependencies defined in `Dependencies.kt`
+- `AndroidLibraryBaseConventionPlugin.kt` — Base configuration for all modules
+- `AndroidLibraryUiConventionPlugin.kt` — Additional configuration for UI modules
+- `KmpLibraryBaseConventionPlugin.kt` — Base configuration for kmp modules
+
+---
+
+## Development
+
+### Code Quality Checks
+
+Format and lint code:
+```bash
 ./gradlew codeFormatAndCheck
 ```
 
-:arrow_forward: Run all Unit & UI tests:
-```
+Run all tests:
+```bash
 ./gradlew allTest
 ```
 
-## Security points
-:point_right: SSL-pinning    
-:point_right: API key placed in 
-``` rootDir/buildSrc/src/keys/apikeys.properties ``` 
-and on the real project file should be added to .gitignore 
+The test suite includes:
+- Unit tests
+- Android instrumented tests
+- Compose UI tests
+
+---
+
+## License
+
+This project is licensed under the **MIT License** — see the [LICENSE](https://github.com/Mepfic/PixabayEye/blob/main/LICENSE) file for details.
